@@ -9,7 +9,7 @@ public class PPrincipal1 extends JFrame {
 
 	private JButton buttonCont;
 	private JLabel presentacion;
-	private JButton buttonLogo;
+	private ImageIcon imageLogo;
 	
 	public PPrincipal1() {
 		componentes();
@@ -22,11 +22,8 @@ public class PPrincipal1 extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		buttonLogo = new JButton(new ImageIcon("imagenes/Logo.jpg"));
-		buttonLogo.setBackground(Color.black);
-		buttonLogo.setBounds(200, 100, 200, 200);
-		add(buttonLogo);
 		
 		presentacion = new JLabel("Almacen de Carros AutoUAN");
 		presentacion.setBounds(250, 50, 400, 50);
