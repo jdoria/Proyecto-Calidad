@@ -115,13 +115,13 @@ public class PPrincipal extends JFrame {
 		
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PPrincipal p = new PPrincipal();
 		
 		p.setVisible(true);
 
-	}
+	}*/
 
 
 }
