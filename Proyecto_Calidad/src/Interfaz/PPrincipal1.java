@@ -5,11 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+
 public class PPrincipal1 extends JFrame {
 
 	private JButton buttonCont;
 	private JLabel presentacion;
-	private ImageIcon imageLogo;
+	private PanelImagen panelImagen;
 	
 	public PPrincipal1() {
 		componentes();
@@ -30,8 +31,12 @@ public class PPrincipal1 extends JFrame {
 		presentacion.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(presentacion);
 		
+		panelImagen = new PanelImagen( );
+		panelImagen.setBounds(120, 100, 562, 360);
+		add( panelImagen );
+		
 		buttonCont = new JButton("Continuar");
-		buttonCont.setBounds(330, 400, 120, 30);
+		buttonCont.setBounds(330, 500, 120, 30);
 		buttonCont.setFont(new Font("Tahoma", 0, 15));
 		add(buttonCont);
 
