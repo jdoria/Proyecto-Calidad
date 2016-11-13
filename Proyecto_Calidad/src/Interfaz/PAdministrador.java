@@ -1,4 +1,4 @@
-package PAdministrador;
+package Interfaz;
 
 public class PAdministrador {
 

@@ -1,4 +1,4 @@
-package PVendedor;
+package Interfaz;
 
 public class PVendedor {
 

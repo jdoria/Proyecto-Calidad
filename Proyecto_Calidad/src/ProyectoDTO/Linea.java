@@ -2,13 +2,23 @@ package ProyectoDTO;
 
 public class Linea {
 	
+	private String idLinea;
 	private String marca;
 	private String nombre;
 	private float codigo;
 	private int numPuntos;
+	private int calificacion;
 	
 	public Linea() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public int getCalificacion() {
+		return calificacion;
+	}
+	
+	public String getIdLinea() {
+		return idLinea;
 	}
 	
 	public float getCodigo() {
@@ -42,5 +52,15 @@ public class Linea {
 	public void setNumPuntos(int numPuntos) {
 		this.numPuntos = numPuntos;
 	}
+	
+	public void setCalificacion(int calificacion) {
+		this.calificacion = calificacion;
+	}
+	
+	public void setIdLinea(String idLinea) {
+		this.idLinea = idLinea;
+	}
+	
+	
 
 }

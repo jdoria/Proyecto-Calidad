@@ -2,6 +2,7 @@ package ProyectoDTO;
 
 public class Vendedor {
 	
+	private String idVendedor;
 	private String nombre;
 	private String apellido;
 	private float identificacion;
@@ -9,6 +10,10 @@ public class Vendedor {
 	
 	public Vendedor() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public String getIdVendedor() {
+		return idVendedor;
 	}
 	
 	public String getApellido() {
@@ -33,6 +38,10 @@ public class Vendedor {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public void setIdVendedor(String idVendedor) {
+		this.idVendedor = idVendedor;
 	}
 	
 	
