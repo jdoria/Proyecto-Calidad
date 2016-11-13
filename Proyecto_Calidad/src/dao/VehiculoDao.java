@@ -21,7 +21,7 @@ public class VehiculoDao {
 	}
 	
 	
-	public ArrayList<Vehiculo> GetVehiculos(){
+	public ArrayList<Vehiculo> GetVehiculos() throws SQLException{
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
 		Conexion conexion = new Conexion();
 		query = "";
@@ -36,11 +36,14 @@ public class VehiculoDao {
 				a.setModelo(rs.getInt("modelo"));
 				vehiculos.add(a);
 				
-			}
-			sentencia.close();																																																																																																																																																																																																																																																																																						
+			}																																																																																																																																																																																																																																																																																						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally{
+			sentencia.close();
+			rs.close();
 		}
 		
 		return vehiculos;
