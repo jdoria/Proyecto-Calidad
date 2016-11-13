@@ -1,6 +1,6 @@
 package Principal;
 
-import Interfaz.PPrincipal;
+//import Interfaz.PPrincipal;
 import Interfaz.PPrincipal1;
 
 public class Principal {

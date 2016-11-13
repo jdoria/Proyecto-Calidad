@@ -109,7 +109,7 @@ public class PPrincipal extends JFrame {
 		add(nPasswordVendedor);
 		
 		ingresarVendedor = new JButton("Ingresar");
-		ingresarVendedor.setBounds(680, 500, 100, 30);
+		ingresarVendedor.setBounds(710, 500, 100, 30);
 		//ingresar.setActionCommand("aceptar");
 		add(ingresarVendedor);
 		

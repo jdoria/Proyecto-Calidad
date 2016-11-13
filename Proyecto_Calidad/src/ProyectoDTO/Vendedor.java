@@ -1,4 +1,4 @@
-package Clases;
+package ProyectoDTO;
 
 public class Vendedor {
 	
