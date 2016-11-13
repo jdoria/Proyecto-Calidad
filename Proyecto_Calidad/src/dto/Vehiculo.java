@@ -1,4 +1,4 @@
-package ProyectoDTO;
+package dto;
 
 public class Vehiculo {
 	

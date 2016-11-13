@@ -1,11 +1,11 @@
-package ProyectoDTO;
+package dto;
 
 public class Administrador {
 	
 	private String idAdmin;
 	private String nombre;
 	private String Apellido;
-	private float identificación;
+	private double identificación;
 	
 	public Administrador() {
 		// TODO Auto-generated constructor stub
@@ -19,7 +19,7 @@ public class Administrador {
 		return Apellido;
 	}
 	
-	public float getIdentificación() {
+	public double getIdentificación() {
 		return identificación;
 	}
 	

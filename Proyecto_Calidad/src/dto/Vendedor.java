@@ -1,11 +1,11 @@
-package ProyectoDTO;
+package dto;
 
 public class Vendedor {
 	
 	private String idVendedor;
 	private String nombre;
 	private String apellido;
-	private float identificacion;
+	private double identificacion;
 	
 	
 	public Vendedor() {
@@ -20,7 +20,7 @@ public class Vendedor {
 		return apellido;
 	}
 	
-	public float getIdentificacion() {
+	public double getIdentificacion() {
 		return identificacion;
 	}
 	
