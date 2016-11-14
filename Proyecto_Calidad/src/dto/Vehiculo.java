@@ -3,7 +3,8 @@ package dto;
 public class Vehiculo {
 	
 	private String idVehiculo;
-	private float precio;
+	private String idLinea1;
+	private double precio;
 	private int modelo;
 	
 	
@@ -19,15 +20,19 @@ public class Vehiculo {
 		return modelo;
 	}
 	
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
+	}
+	
+	public String getIdLinea1() {
+		return idLinea1;
 	}
 	
 	public void setModelo(int modelo) {
 		this.modelo = modelo;
 	}
 	
-	public void setPrecio(float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 	
@@ -35,6 +40,8 @@ public class Vehiculo {
 		this.idVehiculo = idVehiculo;
 	}
 	
-	
+	public void setIdLinea1(String idLinea1) {
+		this.idLinea1 = idLinea1;
+	}
 
 }

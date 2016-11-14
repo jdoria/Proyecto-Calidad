@@ -3,6 +3,7 @@ package dto;
 public class Linea {
 	
 	private String idLinea;
+	private String idVendedor1;
 	private String marca;
 	private String nombre;
 	private float codigo;
@@ -37,6 +38,10 @@ public class Linea {
 		return numPuntos;
 	}
 	
+	public String getIdVendedor1() {
+		return idVendedor1;
+	}
+	
 	public void setCodigo(float codigo) {
 		this.codigo = codigo;
 	}
@@ -59,6 +64,10 @@ public class Linea {
 	
 	public void setIdLinea(String idLinea) {
 		this.idLinea = idLinea;
+	}
+	
+	public void setIdVendedor1(String idVendedor1) {
+		this.idVendedor1 = idVendedor1;
 	}
 	
 	

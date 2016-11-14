@@ -32,7 +32,7 @@ public class Vendedor {
 		this.apellido = apellido;
 	}
 	
-	public void setIdentificacion(float identificacion) {
+	public void setIdentificacion(double identificacion) {
 		this.identificacion = identificacion;
 	}
 	

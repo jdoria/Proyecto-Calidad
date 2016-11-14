@@ -3,8 +3,9 @@ package dto;
 public class Ventas {
 	
 	private String idVentas;
+	private String idVendedor1;
 	private String fecha;
-	private float precioTotal;
+	private double precioTotal;
 	
 	
 	public Ventas() {
@@ -19,8 +20,12 @@ public class Ventas {
 		return idVentas;
 	}
 	
-	public float getPrecioTotal() {
+	public double getPrecioTotal() {
 		return precioTotal;
+	}
+	
+	public String getIdVendedor1() {
+		return idVendedor1;
 	}
 	
 	public void setFecha(String fecha) {
@@ -31,11 +36,13 @@ public class Ventas {
 		this.idVentas = idVentas;
 	}
 	
-	public void setPrecioTotal(float precioTotal) {
+	public void setPrecioTotal(double precioTotal) {
 		this.precioTotal = precioTotal;
 	}
 	
-	
+	public void setIdVendedor1(String idVendedor1) {
+		this.idVendedor1 = idVendedor1;
+	}
 	
 	
 

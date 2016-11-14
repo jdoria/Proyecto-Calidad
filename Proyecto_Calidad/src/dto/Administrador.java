@@ -31,7 +31,7 @@ public class Administrador {
 		Apellido = apellido;
 	}
 	
-	public void setIdentificación(float identificación) {
+	public void setIdentificación(double identificación) {
 		this.identificación = identificación;
 	}
 	

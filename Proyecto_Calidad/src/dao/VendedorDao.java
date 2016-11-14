@@ -21,7 +21,7 @@ public class VendedorDao {
 	}
 	
 	
-	public ArrayList<Vendedor> GetVendedores() throws SQLException{
+	public ArrayList<Vendedor> GetVendedores(){
 		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
 		Conexion conexion = new Conexion();
 		query = "";
@@ -34,18 +34,17 @@ public class VendedorDao {
 				a.setIdVendedor(rs.getString("idVendedor"));
 				a.setNombre(rs.getString("nombre"));
 				a.setApellido(rs.getString("apellido"));
-				a.setIdentificacion(rs.getFloat("identifacion"));
+				a.setIdentificacion(rs.getDouble("identifacion"));
 				vendedores.add(a);
 				
-			}																																																																																																																																																																																																																																																																																						
+			}	
+			sentencia.close();
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		finally{
-			sentencia.close();
-			rs.close();
-		}
+		
 		
 		return vendedores;
 	}

@@ -21,7 +21,7 @@ public class LineaDao {
 	}
 	
 	
-	public ArrayList<Linea> GetLineas() throws SQLException{
+	public ArrayList<Linea> GetLineas(){
 		ArrayList<Linea> lineas = new ArrayList<Linea>();
 		Conexion conexion = new Conexion();
 		query = "";
@@ -40,14 +40,11 @@ public class LineaDao {
 				lineas.add(a);
 				
 			}
+		sentencia.close();
+		rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally{
-			sentencia.close();	
-			rs.close();
-			
 		}
 		return lineas;
 	}

@@ -21,7 +21,7 @@ public class VehiculoDao {
 	}
 	
 	
-	public ArrayList<Vehiculo> GetVehiculos() throws SQLException{
+	public ArrayList<Vehiculo> GetVehiculos(){
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
 		Conexion conexion = new Conexion();
 		query = "";
@@ -36,18 +36,28 @@ public class VehiculoDao {
 				a.setModelo(rs.getInt("modelo"));
 				vehiculos.add(a);
 				
-			}																																																																																																																																																																																																																																																																																						
+			}
+		sentencia.close();
+		rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally{
-			sentencia.close();
-			rs.close();
 		}
 		
 		return vehiculos;
 	}
 
-
+	public void crearVehiculo(Vehiculo vehiculo){
+		Conexion conexion = new Conexion();
+		String query = "";
+		try{
+			sentencia = conexion.conectar().createStatement();
+			query = "INSERT INTO VEHICULO (idVehiculo, idLinea1, precio, modelo) VALUES ('"+vehiculo.getIdVehiculo()+"', '"+vehiculo.getIdLinea1()+"', '"+vehiculo.getPrecio()+"', '"+vehiculo.getModelo()+"')";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 }
