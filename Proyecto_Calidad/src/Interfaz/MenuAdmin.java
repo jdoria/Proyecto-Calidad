@@ -11,6 +11,7 @@ public class MenuAdmin extends JFrame {
 	
 	private JLabel bienvenida;
 	private JButton perfil;
+	private JButton verLineas;
 	private JButton asignarLinea;
 	private JButton asignarPuntos;
 	private JButton calificarVendedor;
@@ -20,7 +21,7 @@ public class MenuAdmin extends JFrame {
 		// TODO Auto-generated constructor stub
 		
 		setTitle("Proyecto Electiva III");
-		setSize(600, 600);
+		setSize(600, 700);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setLayout(null);
@@ -38,28 +39,33 @@ public class MenuAdmin extends JFrame {
 		perfil.setFont(new Font("Tahoma", 0, 15));
 		add(perfil);
 		
+		verLineas = new JButton("Ver Lineas");
+		verLineas.setBounds(220, 280, 150, 30);
+		verLineas.setFont(new Font("Tahoma", 0, 15));
+		add(verLineas);
+		
 		asignarLinea = new JButton("Asignar líneas");
-		asignarLinea.setBounds(220, 280, 150, 30);
+		asignarLinea.setBounds(220, 380, 150, 30);
 		asignarLinea.setFont(new Font("Tahoma", 0, 15));
 		add(asignarLinea);
 		
 		asignarPuntos = new JButton("Asignar puntos");
-		asignarPuntos.setBounds(220, 380, 150, 30);
+		asignarPuntos.setBounds(220, 480, 150, 30);
 		asignarPuntos.setFont(new Font("Tahoma", 0, 15));
 		add(asignarPuntos);		
 
 		calificarVendedor = new JButton("Calificar Vendedores");
-		calificarVendedor.setBounds(215, 480, 165, 30);
+		calificarVendedor.setBounds(215, 580, 165, 30);
 		calificarVendedor.setFont(new Font("Tahoma", 0, 15));
 		add(calificarVendedor);
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MenuAdmin p = new MenuAdmin();
 		
 		p.setVisible(true);
 
-	}*/
+	}
 
 }
