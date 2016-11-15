@@ -46,8 +46,9 @@ public class MenuAdmin extends JFrame {
 		asignarPuntos = new JButton("Asignar puntos");
 		asignarPuntos.setBounds(220, 380, 150, 30);
 		asignarPuntos.setFont(new Font("Tahoma", 0, 15));
-		add(asignarPuntos);
+		add(asignarPuntos);		
 		
+
 		calificarVendedor = new JButton("Calificar Vendedores");
 		calificarVendedor.setBounds(215, 480, 165, 30);
 		calificarVendedor.setFont(new Font("Tahoma", 0, 15));

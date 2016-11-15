@@ -58,4 +58,13 @@ public class VentasDao {
 			e.printStackTrace();
 		}
 	}
+	
+
+	/*public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Ventas v = new Ventas();
+		VentasDao ve = new VentasDao();
+		ve.crearVentas(v);
+	}*/
+
 }
