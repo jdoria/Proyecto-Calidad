@@ -29,7 +29,7 @@ public class VerLineas extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(new FlowLayout());
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		presentacion = new JLabel("Lineas del almacen");
 		presentacion.setBounds(300, 20, 200, 30);
@@ -37,7 +37,7 @@ public class VerLineas extends JFrame {
 		add(presentacion);
 		
 		setTabla();
-		
+		setVisible(true);
 		
 	}
 	
@@ -49,12 +49,5 @@ public class VerLineas extends JFrame {
 		add(js);
 	}
 	
-	public static void main(String[] args){
-		
-		VerLineas v = new VerLineas();
-		v.setVisible(true);
-		
-		
-	}
 
 }

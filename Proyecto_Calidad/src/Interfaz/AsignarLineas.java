@@ -32,7 +32,7 @@ public class AsignarLineas extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		presentacion = new JLabel("Asignación de Lineas");
@@ -71,17 +71,11 @@ public class AsignarLineas extends JFrame implements ActionListener{
 		add(lista2);
 		add(msg2);
 		
-		
+		setVisible(true);
 		
 	}
 	
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		AsignarLineas p = new AsignarLineas();
-		
-		p.setVisible(true);
-
-		}*/
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

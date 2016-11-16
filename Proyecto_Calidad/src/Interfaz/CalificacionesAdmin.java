@@ -5,8 +5,10 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-public class Calificaciones extends JFrame{
+@SuppressWarnings("serial")
+public class CalificacionesAdmin extends JFrame {
 	
 	private JLabel presentacion;
 	private JLabel linea1;
@@ -14,6 +16,11 @@ public class Calificaciones extends JFrame{
 	private JLabel linea3;
 	private JLabel linea4;
 	private JLabel linea5;
+	private JTextField cuadro1;
+	private JTextField cuadro2;
+	private JTextField cuadro3;
+	private JTextField cuadro4;
+	private JTextField cuadro5;
 	private JLabel calificacion1;
 	private JLabel calificacion2;
 	private JLabel calificacion3;
@@ -21,7 +28,7 @@ public class Calificaciones extends JFrame{
 	private JLabel calificacion5;
 	
 	
-	public Calificaciones() {
+	public CalificacionesAdmin() {
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Electiva III");
 		setSize(600, 400);
@@ -67,30 +74,51 @@ public class Calificaciones extends JFrame{
 		calificacion1.setFont(new Font("Tahoma",0 , 15));
 		add(calificacion1);
 		
+		cuadro1 = new JTextField();
+		cuadro1.setBounds(350, 100, 150, 30);
+		add(cuadro1);
+		
+		
 		calificacion2 = new JLabel("Calificacion:");
 		calificacion2.setBounds(300, 150, 150, 30);
 		calificacion2.setFont(new Font("Tahoma",0 , 15));
 		add(calificacion2);
+		
+		cuadro2 = new JTextField();
+		cuadro2.setBounds(350, 150, 150, 30);
+		add(cuadro2);
 		
 		calificacion3 = new JLabel("Calificacion:");
 		calificacion3.setBounds(300, 200, 150, 30);
 		calificacion3.setFont(new Font("Tahoma",0 , 15));
 		add(calificacion3);
 		
+		cuadro3 = new JTextField();
+		cuadro3.setBounds(350, 200, 150, 30);
+		add(cuadro3);
+		
 		calificacion4 = new JLabel("Calificacion:");
 		calificacion4.setBounds(300, 250, 150, 30);
 		calificacion4.setFont(new Font("Tahoma",0 , 15));
 		add(calificacion4);
+		
+		cuadro4 = new JTextField();
+		cuadro4.setBounds(350, 250, 150, 30);
+		add(cuadro4);
 		
 		calificacion5 = new JLabel("Calificacion:");
 		calificacion5.setBounds(300, 300, 150, 30);
 		calificacion5.setFont(new Font("Tahoma",0 , 15));
 		add(calificacion5);
 		
+		cuadro5 = new JTextField();
+		cuadro5.setBounds(350, 300, 150, 30);
+		add(cuadro5);
+		
 		setVisible(true);
 		
 	}
 	
-	
-}
 
+
+}

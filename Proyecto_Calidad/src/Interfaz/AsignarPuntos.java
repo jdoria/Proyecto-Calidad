@@ -30,7 +30,7 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		presentacion = new JLabel("Asignación de Puntos");
 		presentacion.setBounds(100, 30, 220, 30);
@@ -64,18 +64,11 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 		add(lista);
 		add(msg);
 		
-		
+		setVisible(true);
 	}
 	
 	
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		AsignarPuntos p = new AsignarPuntos();
-		
-		p.setVisible(true);
-
-		}*/
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

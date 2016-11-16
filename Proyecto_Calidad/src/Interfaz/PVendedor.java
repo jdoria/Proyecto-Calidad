@@ -2,12 +2,14 @@ package Interfaz;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class PVendedor extends JFrame {
 	
 	private JLabel presentacion;
@@ -71,12 +73,18 @@ public class PVendedor extends JFrame {
 		botonCalificaciones = new JButton("Ver");
 		botonCalificaciones.setBounds(310, 440, 100, 30);
 		botonCalificaciones.setFont(new Font("Tahoma", 0, 15));
+		botonCalificaciones.setActionCommand("ver_calificaciones");
 		add(botonCalificaciones);
 		 setVisible(true);
 		
 	}
 	
 	
+	/**
+	 * Manejo de eventos
+	 */
 	
-	
+	public void buttonCalificaciones(ActionListener l){
+		botonCalificaciones.addActionListener(l);
+	}
 }

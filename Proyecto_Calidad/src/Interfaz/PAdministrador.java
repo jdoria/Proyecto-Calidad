@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class PAdministrador extends JFrame {
 	
 	private JLabel presentacion;
@@ -24,7 +25,7 @@ public class PAdministrador extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		presentacion = new JLabel("Administrador");

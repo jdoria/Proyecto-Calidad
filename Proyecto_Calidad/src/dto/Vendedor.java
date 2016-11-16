@@ -3,6 +3,7 @@ package dto;
 public class Vendedor {
 	
 	private String idVendedor;
+	private String idUsuario1;
 	private String nombre;
 	private String apellido;
 	private double identificacion;
@@ -26,6 +27,14 @@ public class Vendedor {
 	
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public String getIdUsuario1() {
+		return idUsuario1;
+	}
+	
+	public void setIdUsuario1(String idUsuario1) {
+		this.idUsuario1 = idUsuario1;
 	}
 	
 	public void setApellido(String apellido) {

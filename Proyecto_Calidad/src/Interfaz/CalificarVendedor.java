@@ -28,7 +28,7 @@ public class CalificarVendedor extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		presentacion = new JLabel("Calificar Vendedores");
@@ -54,16 +54,11 @@ public class CalificarVendedor extends JFrame implements ActionListener{
 		add(lista2);
 		add(msg1);
 		
+		setVisible(true);
 		
 	}
 	
-	public static void main(String[] args) {
-	// TODO Auto-generated method stub
-	CalificarVendedor p = new CalificarVendedor();
 	
-	p.setVisible(true);
-
-	}
 	
 	
 	@Override
