@@ -29,7 +29,7 @@ public class PVendedor extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		presentacion = new JLabel("Vendedor");
@@ -72,17 +72,11 @@ public class PVendedor extends JFrame {
 		botonCalificaciones.setBounds(310, 440, 100, 30);
 		botonCalificaciones.setFont(new Font("Tahoma", 0, 15));
 		add(botonCalificaciones);
-		
+		 setVisible(true);
 		
 	}
 	
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		PVendedor p = new PVendedor();
-		
-		p.setVisible(true);
-
-		}
+	
 	
 }

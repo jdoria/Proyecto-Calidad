@@ -26,7 +26,7 @@ public class MenuAdmin extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		bienvenida = new JLabel("Bienvenido Administrador");
@@ -58,14 +58,9 @@ public class MenuAdmin extends JFrame {
 		calificarVendedor.setBounds(215, 580, 165, 30);
 		calificarVendedor.setFont(new Font("Tahoma", 0, 15));
 		add(calificarVendedor);
+		
+		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		MenuAdmin p = new MenuAdmin();
-		
-		p.setVisible(true);
-
-	}
-
+	
 }

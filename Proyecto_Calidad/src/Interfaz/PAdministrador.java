@@ -53,15 +53,9 @@ public class PAdministrador extends JFrame {
 		identificacion.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(identificacion);
 		
-		
+		setVisible(true);
 		
 	}
 	
-	/*public static void main(String[] args) {
-	// TODO Auto-generated method stub
-	PAdministrador p = new PAdministrador();
 	
-	p.setVisible(true);
-
-	}*/
 }

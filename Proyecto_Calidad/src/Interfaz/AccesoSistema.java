@@ -2,19 +2,20 @@ package Interfaz;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PPrincipal extends JFrame {
+@SuppressWarnings("serial")
+public class AccesoSistema extends JFrame {
 	
 	private JLabel anuncio;
-	private JButton buttonVendedor;
-	private JButton buttonAdmin;
+	private JButton logoVendedor;
+	private JButton logoAdmin;
 	private JLabel labelAdmin;
 	private JLabel labelVendedor;
 	private JTextField usuarioAdmin;
@@ -28,7 +29,7 @@ public class PPrincipal extends JFrame {
 	private JButton ingresarAdmin;
 	private JButton ingresarVendedor;
 	
-	public PPrincipal() {
+	public AccesoSistema() {
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Electiva III");
 		setSize(1000, 650);
@@ -36,7 +37,7 @@ public class PPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		anuncio = new JLabel("INGRESO AL SISTEMA");
@@ -44,11 +45,11 @@ public class PPrincipal extends JFrame {
 		anuncio.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(anuncio);
 		
-		buttonAdmin = new JButton(new ImageIcon("imagenes/admin.jpg"));
-		buttonAdmin.setBackground(Color.black);
-		buttonAdmin.setRolloverIcon(new ImageIcon("imagenes/admin2.jpg"));
-		buttonAdmin.setBounds(150, 100, 200, 200);
-		add(buttonAdmin);
+		logoAdmin = new JButton(new ImageIcon("imagenes/admin.jpg"));
+		logoAdmin.setBackground(Color.black);
+		logoAdmin.setRolloverIcon(new ImageIcon("imagenes/admin2.jpg"));
+		logoAdmin.setBounds(150, 100, 200, 200);
+		add(logoAdmin);
 		
 		labelAdmin = new JLabel("Administrador");
 		labelAdmin.setBounds(170, 320, 400, 50);
@@ -75,15 +76,16 @@ public class PPrincipal extends JFrame {
 		
 		ingresarAdmin = new JButton("Ingresar");
 		ingresarAdmin.setBounds(190, 500, 100, 30);
+		ingresarAdmin.setActionCommand("login_admin");
 		//ingresar.setActionCommand("aceptar");
 		add(ingresarAdmin);
 
 		
-		buttonVendedor = new JButton(new ImageIcon("imagenes/vendedor.jpg"));
-		buttonVendedor.setBackground(Color.black);
-		buttonVendedor.setRolloverIcon(new ImageIcon("imagenes/vendedor2.jpg"));
-		buttonVendedor.setBounds(650, 100, 200, 200);
-		add(buttonVendedor);
+		logoVendedor = new JButton(new ImageIcon("imagenes/vendedor.jpg"));
+		logoVendedor.setBackground(Color.black);
+		logoVendedor.setRolloverIcon(new ImageIcon("imagenes/vendedor2.jpg"));
+		logoVendedor.setBounds(650, 100, 200, 200);
+		add(logoVendedor);
 		
 		labelVendedor = new JLabel("Vendedor");
 		labelVendedor.setBounds(700, 320, 400, 50);
@@ -110,18 +112,41 @@ public class PPrincipal extends JFrame {
 		
 		ingresarVendedor = new JButton("Ingresar");
 		ingresarVendedor.setBounds(710, 500, 100, 30);
+		ingresarVendedor.setActionCommand("login_vendedor");
 		//ingresar.setActionCommand("aceptar");
 		add(ingresarVendedor);
 		
+		setVisible(true);
+		
 	}
 	
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		PPrincipal p = new PPrincipal();
-		
-		p.setVisible(true);
+	public String getUser() {
+		return usuarioAdmin.getText();
+	}
+	
+	public String getPassword() {
+		return passwordAdmin.getText();
+	}
 
-	}*/
-
-
+	public String getUserVendedor(){
+		return usuarioVendedor.getText();
+	}
+	
+	public String getPasswordVendedor(){
+		return passwordVendedor.getText();
+	}
+	
+	
+	/**
+	 * Manejo de eventos
+	 */
+	
+	public void buttonAdmin(ActionListener l) {
+		ingresarAdmin.addActionListener(l);
+	}
+	
+	public void buttonVendedor(ActionListener l) {
+		ingresarVendedor.addActionListener(l);
+	}
+	
 }
