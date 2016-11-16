@@ -48,6 +48,23 @@ public class LineaDao {
 		}
 		return lineas;
 	}
-
+	
+	
+	public void asignarPuntos(int puntos, Linea linea){
+		//Linea linea = new Linea();
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "UPDATE linea SET NumPuntos = '"+puntos+"' WHERE '"+linea.getIdLinea()+"'";
+			sentencia.executeQuery(query);
+			sentencia.close();
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
 
 }
