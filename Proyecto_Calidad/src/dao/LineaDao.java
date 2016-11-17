@@ -49,6 +49,30 @@ public class LineaDao {
 		return lineas;
 	}
 	
+	public ArrayList<Linea> getLineaVendedor(String idVendedor){
+		ArrayList<Linea> lineas = new ArrayList<>();
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "select nombre from linea where idVendedor1 = '"+idVendedor+"'";
+			rs = sentencia.executeQuery(query);
+			while(rs.next()){
+				Linea a = new Linea();
+				a.setNombre(rs.getString("nombre"));
+				lineas.add(a);
+				
+			}
+		sentencia.close();
+		rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return lineas;
+	}
+	
 	public void AsignarVendedor(String idVendedor, String nombreLinea){
 		Conexion conexion = new Conexion();
 		query = "";

@@ -15,12 +15,13 @@ import Interfaz.MenuVende;
 import Interfaz.PAdministrador;
 import Interfaz.PVendedor;
 import Interfaz.Principal;
+import Interfaz.SeleccionarVendedor;
 import Interfaz.VentasRealizadas;
 import Interfaz.VerLineas;
 import dao.LineaDao;
 import dao.UsuarioDao;
 import Interfaz.Calificaciones;
-import Interfaz.CalificarVendedor;
+import Interfaz.CalificacionesAdmin;
 
 public class Controller {
 	
@@ -36,7 +37,8 @@ public class Controller {
 	private VerLineas verLineas;
 	private AsignarLineas asignarLineas;
 	private AsignarPuntos asignarPuntos;
-	private CalificarVendedor calificarVendedores;
+	private SeleccionarVendedor seleccionarVendedor;
+	private CalificacionesAdmin calificacionesAdmin;
 	private LineaDao lineaDao = new LineaDao();
 	private String tNumPuntos;
 	private int numPuntos;
@@ -154,13 +156,26 @@ public class Controller {
 				asignarPuntos.buttonAsignar(new listenerAsignarPuntos());
 				
 			}else if(e.getActionCommand().equals("calificar_vendedores")){
-				calificarVendedores = new CalificarVendedor();
+				seleccionarVendedor = new SeleccionarVendedor();
+				seleccionarVendedor.getIdVendedor();
+				seleccionarVendedor.buttonAsignar(new listenerCalificacionesAdmin());
 			}
 			
 		}
 		
 	}
 	
+	public class listenerCalificacionesAdmin implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			//seleccionarVendedor.getIdVendedor();
+			calificacionesAdmin = new CalificacionesAdmin(seleccionarVendedor.getIdVendedor());
+			
+		}
+		
+	}
 	
 	public class listenerAsignarLineas implements ActionListener{
 
