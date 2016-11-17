@@ -4,21 +4,28 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import dao.LineaDao;
+import dto.Linea;
+
+@SuppressWarnings("serial")
 public class VerLineas extends JFrame {
 
 	private JLabel presentacion;
 	private JTable tabla;
 	private String[] cabecera = {"idLinea", "Marca", "Nombre", "Código", "Numéro de Puntos"};
-	private String[][] datos = {{"1", "2", "3", "4", "5"},
-			{"1", "2", "3", "4", "5"},{"1", "2", "3", "4", "5"},
-	};
+	private String[][] datos;
 	private JScrollPane js;
+	private LineaDao lineas1 = new LineaDao();
+
+	
+	
 	
 	public VerLineas() {
 		// TODO Auto-generated constructor stub
@@ -48,6 +55,4 @@ public class VerLineas extends JFrame {
 		js.setPreferredSize(new Dimension(600,400));
 		add(js);
 	}
-	
-
 }

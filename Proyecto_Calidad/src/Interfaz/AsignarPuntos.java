@@ -4,12 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import dao.LineaDao;
 
 public class AsignarPuntos extends JFrame implements ActionListener{
 	
@@ -18,9 +22,11 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 	private JLabel puntos;
 	private JTextField numPuntos;
 	private JButton asignar;
-	private String[] lineas = {"linea 1", "linea 2", "linea 3", "linea 4", "linea 5"};
-	private JComboBox lista = new JComboBox(lineas);
+	private ArrayList<String> listaLineas = new ArrayList<>();
+	private DefaultComboBoxModel mlista1 = new DefaultComboBoxModel<>();
+	private JComboBox lista = new JComboBox();
 	private JLabel msg = new JLabel();
+	private LineaDao objetoLinea = new LineaDao();
 	
 	public AsignarPuntos() {
 		// TODO Auto-generated constructor stub
@@ -31,6 +37,13 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 		setLayout(null);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		for(int i = 0; i< objetoLinea.GetLineas().size();i++){
+			listaLineas.add(objetoLinea.GetLineas().get(i).getNombre());
+			mlista1.addElement(listaLineas.get(i));
+		}
+		
+		lista.setModel(mlista1);
 		
 		presentacion = new JLabel("Asignación de Puntos");
 		presentacion.setBounds(100, 30, 220, 30);
@@ -54,6 +67,7 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 		asignar = new JButton("Asignar");
 		asignar.setBounds(140, 300, 120, 30);
 		asignar.setFont(new Font("Tahoma", 0, 15));
+		asignar.setActionCommand("asignar");
 		add(asignar);
 		
 		lista.setBounds(150, 100, 120, 30);
@@ -68,6 +82,17 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 	}
 	
 	
+	public String getPuntos(){
+		return numPuntos.getText();
+	}
+	
+	public String getLinea(){
+		return msg.getText();
+	}
+	
+	public void buttonAsignar(ActionListener l){
+		asignar.addActionListener(l);
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -75,19 +100,12 @@ public class AsignarPuntos extends JFrame implements ActionListener{
 		if(e.getSource() == lista){
 			JComboBox cb = (JComboBox)e.getSource();
 			String msg1 = (String)cb.getSelectedItem();
-			switch(msg1){
-			case "linea 1": msg.setText("Linea 1"); 
-			break;
-			case "linea 2": msg.setText("Linea 2"); 
-			break;
-			case "linea 3": msg.setText("Linea 3"); 
-			break;
-			case "linea 4": msg.setText("Linea 4"); 
-			break;
-			case "linea 5": msg.setText("Linea 5"); 
-			break;
-			default: msg.setText("Error");
+			for(int i=0; i<listaLineas.size(); i++){
+				if(listaLineas.get(i).equals(msg1)){
+					msg.setText(objetoLinea.GetLineas().get(i).getNombre());
+				}
 			}
+			
 			
 		}
 

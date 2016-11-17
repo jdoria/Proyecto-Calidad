@@ -6,6 +6,8 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dao.LineaDao;
+
 public class Calificaciones extends JFrame{
 	
 	private JLabel presentacion;
@@ -19,6 +21,7 @@ public class Calificaciones extends JFrame{
 	private JLabel calificacion3;
 	private JLabel calificacion4;
 	private JLabel calificacion5;
+	private LineaDao lineas;
 	
 	
 	public Calificaciones() {

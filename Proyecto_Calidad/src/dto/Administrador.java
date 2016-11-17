@@ -5,7 +5,7 @@ public class Administrador {
 	private String idAdmin;
 	private String nombre;
 	private String Apellido;
-	private double identificación;
+	private String identificación;
 	
 	public Administrador() {
 		// TODO Auto-generated constructor stub
@@ -19,7 +19,7 @@ public class Administrador {
 		return Apellido;
 	}
 	
-	public double getIdentificación() {
+	public String getIdentificación() {
 		return identificación;
 	}
 	
@@ -31,7 +31,7 @@ public class Administrador {
 		Apellido = apellido;
 	}
 	
-	public void setIdentificación(double identificación) {
+	public void setIdentificacion(String identificación) {
 		this.identificación = identificación;
 	}
 	

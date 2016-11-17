@@ -120,11 +120,11 @@ public class AccesoSistema extends JFrame {
 		
 	}
 	
-	public String getUser() {
+	public String getAdmin() {
 		return usuarioAdmin.getText();
 	}
 	
-	public String getPassword() {
+	public String getPasswordAdmin() {
 		return passwordAdmin.getText();
 	}
 

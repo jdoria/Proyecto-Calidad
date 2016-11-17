@@ -4,11 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import dao.LineaDao;
+import dao.VendedorDao;
 
 public class AsignarLineas extends JFrame implements ActionListener{
 	
@@ -16,12 +21,17 @@ public class AsignarLineas extends JFrame implements ActionListener{
 	private JLabel vendedor;
 	private JLabel linea;
 	private JButton asignar;
-	private String[] lineas = {"linea 1", "linea 2", "linea 3", "linea 4", "linea 5"};
-	private JComboBox lista = new JComboBox(lineas);
-	private String[] vendedores = {"vendedor 1", "vendedor 2", "vendedor 3", "vendedor 4", "vendedor 5"};
-	private JComboBox lista2 = new JComboBox(vendedores);
+	private ArrayList<String> listaLineas = new ArrayList<>();
+	private JComboBox lista1 = new JComboBox();
+	private ArrayList<String> listaVendedores = new ArrayList<>();
+	private JComboBox lista2 = new JComboBox();
+	private DefaultComboBoxModel mlista1 = new DefaultComboBoxModel<>();
+	private DefaultComboBoxModel mlista2 = new DefaultComboBoxModel<>();
 	private JLabel msg1 = new JLabel();
 	private JLabel msg2 = new JLabel();
+	private LineaDao objetoLinea = new LineaDao();
+	private VendedorDao objetoVendedor = new VendedorDao();
+	private String idVendedor;
 	
 	
 	public AsignarLineas() {
@@ -34,6 +44,18 @@ public class AsignarLineas extends JFrame implements ActionListener{
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		for(int i = 0; i< objetoLinea.GetLineas().size();i++){
+			listaLineas.add(objetoLinea.GetLineas().get(i).getNombre());
+			mlista1.addElement(listaLineas.get(i));
+		}
+		
+		for(int i = 0; i< objetoVendedor.GetVendedores().size();i++){
+			listaVendedores.add(objetoVendedor.GetVendedores().get(i).getNombre());
+			mlista2.addElement(listaVendedores.get(i));
+		}
+		
+		lista1.setModel(mlista1);
+		lista2.setModel(mlista2);
 		
 		presentacion = new JLabel("Asignación de Lineas");
 		presentacion.setBounds(100, 30, 220, 30);
@@ -53,14 +75,15 @@ public class AsignarLineas extends JFrame implements ActionListener{
 		asignar = new JButton("Asignar");
 		asignar.setBounds(140, 300, 120, 30);
 		asignar.setFont(new Font("Tahoma", 0, 15));
+		asignar.setActionCommand("asignar");
 		add(asignar);
 		
-		lista.setBounds(150, 200, 120, 30);
-		lista.setSelectedIndex(0);
-		lista.addActionListener(this);
+		lista1.setBounds(150, 200, 120, 30);
+		lista1.setSelectedIndex(0);
+		lista1.addActionListener(this);
 		msg1.setBounds(150, 230, 120, 30);
 		msg1.setFont(new Font("Tahoma", 0, 15));
-		add(lista);
+		add(lista1);
 		add(msg1);
 		
 		lista2.setBounds(150, 100, 120, 30);
@@ -75,30 +98,41 @@ public class AsignarLineas extends JFrame implements ActionListener{
 		
 	}
 	
+	public void buttonAsignar(ActionListener l){
+		asignar.addActionListener(l);
+	}
 	
-
+	public String getLinea(){
+		return msg1.getText();
+	}
+	
+	public String getIdVendedor(){
+		return idVendedor;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == lista){
+		if(e.getSource() == lista1){
 			JComboBox cb = (JComboBox)e.getSource();
 			String msg = (String)cb.getSelectedItem();
-			switch(msg){
-			case "linea 1": msg1.setText("Linea 1"); 
-			break;
-			case "linea 2": msg1.setText("Linea 2"); 
-			break;
-			case "linea 3": msg1.setText("Linea 3"); 
-			break;
-			case "linea 4": msg1.setText("Linea 4"); 
-			break;
-			case "linea 5": msg1.setText("Linea 5"); 
-			break;
-			default: msg1.setText("Error");
+			for(int i=0; i<listaLineas.size(); i++){
+				if(listaLineas.get(i).equals(msg)){
+					msg1.setText(objetoLinea.GetLineas().get(i).getNombre());
+				}
+			}
+			
+		}else if(e.getSource() == lista2){
+			JComboBox cb = (JComboBox)e.getSource();
+			String msg = (String)cb.getSelectedItem();
+			for(int i=0; i<listaVendedores.size(); i++){
+				if(listaVendedores.get(i).equals(msg)){
+					msg2.setText(objetoVendedor.GetVendedores().get(i).getNombre());
+					idVendedor = objetoVendedor.GetVendedores().get(i).getIdVendedor();
+				}
 			}
 			
 		}
-		
 	}
 
 }

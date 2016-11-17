@@ -49,15 +49,30 @@ public class LineaDao {
 		return lineas;
 	}
 	
+	public void AsignarVendedor(String idVendedor, String nombreLinea){
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "UPDATE linea SET idVendedor1 = '"+idVendedor+"' WHERE Nombre = '"+nombreLinea+"'";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
 	
-	public void asignarPuntos(int puntos, Linea linea){
+	public void asignarPuntos(int puntos, String nombreLinea){
 		//Linea linea = new Linea();
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "UPDATE linea SET NumPuntos = '"+puntos+"' WHERE '"+linea.getIdLinea()+"'";
-			sentencia.executeQuery(query);
+			query = "UPDATE linea SET NumPuntos = '"+puntos+"' WHERE Nombre = '"+nombreLinea+"'";
+			sentencia.executeUpdate(query);
 			sentencia.close();
 			
 			

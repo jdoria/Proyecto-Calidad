@@ -2,8 +2,10 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 
 import Interfaz.AccesoSistema;
 import Interfaz.AsignarLineas;
@@ -15,6 +17,8 @@ import Interfaz.PVendedor;
 import Interfaz.Principal;
 import Interfaz.VentasRealizadas;
 import Interfaz.VerLineas;
+import dao.LineaDao;
+import dao.UsuarioDao;
 import Interfaz.Calificaciones;
 import Interfaz.CalificarVendedor;
 
@@ -33,7 +37,10 @@ public class Controller {
 	private AsignarLineas asignarLineas;
 	private AsignarPuntos asignarPuntos;
 	private CalificarVendedor calificarVendedores;
-	
+	private LineaDao lineaDao = new LineaDao();
+	private String tNumPuntos;
+	private int numPuntos;
+	private UsuarioDao usuario = new UsuarioDao();
 	
 	public Controller(Principal interfaz) {
 		this.interfazPrincipal = interfaz;
@@ -61,24 +68,36 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if (e.getActionCommand().equals("login_admin")) {
-				System.out.println("user admin: " + accesoSistema.getUser());
-				System.out.println("user pwd: " + accesoSistema.getPassword());
-				administrador_interfaz_principal = new MenuAdmin();
-				administrador_interfaz_principal.buttonPerfil(new listenerManejoDeEventosAdmin());
-				administrador_interfaz_principal.buttonVerLineas(new listenerManejoDeEventosAdmin());
-				administrador_interfaz_principal.buttonAsignarLineas(new listenerManejoDeEventosAdmin());
-				administrador_interfaz_principal.buttonAsignarPuntos(new listenerManejoDeEventosAdmin());
-				administrador_interfaz_principal.buttonCalificarVendedores(new listenerManejoDeEventosAdmin());
-			}
-			else if (e.getActionCommand().equals("login_vendedor")) {
+				System.out.println("user admin: " + accesoSistema.getAdmin());
+				System.out.println("user pwd: " + accesoSistema.getPasswordAdmin());
+				if(accesoSistema.getAdmin().equals("jdoria") && accesoSistema.getPasswordAdmin().equals("juan9608")){
+					administrador_interfaz_principal = new MenuAdmin();
+					administrador_interfaz_principal.buttonPerfil(new listenerManejoDeEventosAdmin());
+					administrador_interfaz_principal.buttonVerLineas(new listenerManejoDeEventosAdmin());
+					administrador_interfaz_principal.buttonAsignarLineas(new listenerManejoDeEventosAdmin());
+					administrador_interfaz_principal.buttonAsignarPuntos(new listenerManejoDeEventosAdmin());
+					administrador_interfaz_principal.buttonCalificarVendedores(new listenerManejoDeEventosAdmin());
+				}else{
+					JOptionPane.showMessageDialog(null, "ERROR DE AUTENTICACION", "ACCESO DENEGADO",
+							JOptionPane.ERROR_MESSAGE);
+				}
+					
+			
+			}else if (e.getActionCommand().equals("login_vendedor")){
 				System.out.println("user admin: " + accesoSistema.getUserVendedor());
 				System.out.println("user pwd: " + accesoSistema.getPasswordVendedor());
-				var_Session = accesoSistema.getUserVendedor();
-				vendedor_interfaz_principal = new MenuVende();
-				vendedor_interfaz_principal.buttonPerfil(new listenerManejoDeEventosVendedor());
-				vendedor_interfaz_principal.buttonIngresarVentas(new listenerManejoDeEventosVendedor());
-				vendedor_interfaz_principal.buttonVentasRealizadas(new listenerManejoDeEventosVendedor());
-				vendedor_interfaz_principal.setUserLabel(var_Session);
+				if(usuario.validarUsuarios(accesoSistema.getUserVendedor(), accesoSistema.getPasswordVendedor())){
+					var_Session = accesoSistema.getUserVendedor();
+					vendedor_interfaz_principal = new MenuVende();
+					vendedor_interfaz_principal.buttonPerfil(new listenerManejoDeEventosVendedor());
+					vendedor_interfaz_principal.buttonIngresarVentas(new listenerManejoDeEventosVendedor());
+					vendedor_interfaz_principal.buttonVentasRealizadas(new listenerManejoDeEventosVendedor());					vendedor_interfaz_principal.setUserLabel(var_Session);
+					
+				}else{
+					JOptionPane.showMessageDialog(null, "ERROR DE AUTENTICACION", "ACCESO DENEGADO",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 		}
 		
@@ -129,8 +148,11 @@ public class Controller {
 				verLineas = new VerLineas();
 			}else if(e.getActionCommand().equals("asignar_linea")){
 				asignarLineas = new AsignarLineas();
+				asignarLineas.buttonAsignar(new listenerAsignarLineas());
 			}else if(e.getActionCommand().equals("asignar_puntos")){
 				asignarPuntos = new AsignarPuntos();
+				asignarPuntos.buttonAsignar(new listenerAsignarPuntos());
+				
 			}else if(e.getActionCommand().equals("calificar_vendedores")){
 				calificarVendedores = new CalificarVendedor();
 			}
@@ -139,6 +161,33 @@ public class Controller {
 		
 	}
 	
+	
+	public class listenerAsignarLineas implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			lineaDao.AsignarVendedor(asignarLineas.getIdVendedor(), asignarLineas.getLinea());
+		}
+		
+	}
+	
+	public class listenerAsignarPuntos implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			tNumPuntos = asignarPuntos.getPuntos();
+			numPuntos = Integer.parseInt(tNumPuntos);
+			if(tNumPuntos == null || asignarPuntos.getLinea().equals(null)){
+				JOptionPane.showMessageDialog(null, "ERROR DE ASIGNACION", "CAMPO VACIO",
+						JOptionPane.ERROR_MESSAGE);
+			}else{
+				lineaDao.asignarPuntos(numPuntos, asignarPuntos.getLinea());
+			}
+		}
+		
+	}
 	
 	public static void main(String[] args){
 		Principal i = new Principal();

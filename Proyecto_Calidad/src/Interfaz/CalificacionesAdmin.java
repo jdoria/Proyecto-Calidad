@@ -119,6 +119,29 @@ public class CalificacionesAdmin extends JFrame {
 		
 	}
 	
+	/**
+	 * Manejo de eventos
+	 */
+	
+	public String getCuadro1(){
+		return cuadro1.getText();
+	}
+	
+	public String getCuadro2(){
+		return cuadro2.getText();
+	}
+	
+	public String getCuadro3(){
+		return cuadro3.getText();
+	}
+	
+	public String getCuadro4(){
+		return cuadro4.getText();
+	}
+	
+	public String getCuadro5(){
+		return cuadro5.getText();
+	}
 
 
 }

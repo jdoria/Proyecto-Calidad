@@ -4,23 +4,40 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import dao.VendedorDao;
 
 public class CalificarVendedor extends JFrame implements ActionListener{
 
 	private JLabel presentacion;
 	private JLabel vendedor;
 	private JButton ver;
-	private String[] vendedores = {"vendedor 1", "vendedor 2", "vendedor 3", "vendedor 4", "vendedor 5"};
-	private JComboBox lista2 = new JComboBox(vendedores);
+	private ArrayList<String> listaVendedores = new ArrayList<String>();
 	private JLabel msg1 = new JLabel();
+	private DefaultComboBoxModel mdcombo= new DefaultComboBoxModel<>();
+	private VendedorDao vendedores;
+	private JComboBox lista2 = new JComboBox();
 	
 	public CalificarVendedor() {
 		// TODO Auto-generated constructor stub
+		
+		vendedores = new VendedorDao();
+		
+		for(int i = 0;i<vendedores.GetVendedores().size(); i++){
+			listaVendedores.add(vendedores.GetVendedores().get(i).getNombre());
+			mdcombo.addElement(listaVendedores.get(i));
+		}
+		
+		
+		
+		lista2.setModel(mdcombo);
 		
 		setTitle("Proyecto Electiva III");
 		setSize(400, 400);
@@ -41,7 +58,7 @@ public class CalificarVendedor extends JFrame implements ActionListener{
 		vendedor.setFont(new Font("Tahoma",0, 15));
 		add(vendedor);
 		
-		ver = new JButton("Ver Perfil");
+		ver = new JButton("Calificar");
 		ver.setBounds(140, 300, 120, 30);
 		ver.setFont(new Font("Tahoma", 0, 15));
 		add(ver);
@@ -59,10 +76,14 @@ public class CalificarVendedor extends JFrame implements ActionListener{
 	}
 	
 	
-	
+	public static void main(String[] args){
+		CalificarVendedor p = new CalificarVendedor();
+		
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		
 		if(e.getSource() == lista2){
 			JComboBox cb = (JComboBox)e.getSource();

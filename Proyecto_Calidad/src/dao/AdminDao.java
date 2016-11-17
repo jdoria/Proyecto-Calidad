@@ -6,47 +6,43 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ConexionBD.Conexion;
-import dto.Vendedor;
+import dto.Administrador;
 
-public class VendedorDao {
-	
+public class AdminDao {
 	private Statement sentencia;
 	private String query;
 	private ResultSet rs;
 	
-	public VendedorDao() {
+	public AdminDao() {
 		// TODO Auto-generated constructor stub
 		this.sentencia = null;
 		this.rs = null;
 	}
 	
-	
-	public ArrayList<Vendedor> GetVendedores(){
-		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+	public Administrador GetAdmin(){
+		Administrador admin = new Administrador();
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select idVendedor, nombre, apellido, identificacion from vendedor;";
+			query = "select idAdmin, nombre, apellido, identificacion from administrador;";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
-				Vendedor a = new Vendedor();
-				a.setIdVendedor(rs.getString("idVendedor"));
-				a.setNombre(rs.getString("nombre"));
-				a.setApellido(rs.getString("apellido"));
-				a.setIdentificacion(rs.getDouble("identificacion"));
-				vendedores.add(a);
+				Administrador a = new Administrador();
+				a.setApellido("apellido");
+				a.setIdAdmin("idAdmin");
+				a.setIdentificacion("identifacion");
 				
-			}	
-			sentencia.close();
-			rs.close();
+				
+			}
+		sentencia.close();
+		rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		return vendedores;
+		return admin;
 	}
+	
 
 }
