@@ -7,7 +7,7 @@ public class Vendedor {
 	private String nombre;
 	private String apellido;
 	private double identificacion;
-	
+	private String calificacion;
 	
 	public Vendedor() {
 		// TODO Auto-generated constructor stub
@@ -31,6 +31,14 @@ public class Vendedor {
 	
 	public String getIdUsuario1() {
 		return idUsuario1;
+	}
+	
+	public String getCalificacion() {
+		return calificacion;
+	}
+	
+	public void setCalificacion(String calificacion) {
+		this.calificacion = calificacion;
 	}
 	
 	public void setIdUsuario1(String idUsuario1) {

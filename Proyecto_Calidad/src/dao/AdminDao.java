@@ -25,13 +25,14 @@ public class AdminDao {
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select idAdmin, nombre, apellido, identificacion from administrador;";
+			query = "select idAdmin, Nombre, Apellido, Identificacion from administrador;";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
 				Administrador a = new Administrador();
-				a.setApellido("apellido");
-				a.setIdAdmin("idAdmin");
-				a.setIdentificacion("identifacion");
+				a.setNombre("idAdmin");
+				a.setApellido("nombre");
+				a.setIdAdmin("apellido");
+				a.setIdentificacion("identificacion");
 				
 				
 			}

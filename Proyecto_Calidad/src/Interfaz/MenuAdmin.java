@@ -16,6 +16,7 @@ public class MenuAdmin extends JFrame {
 	private JButton asignarLinea;
 	private JButton asignarPuntos;
 	private JButton calificarVendedor;
+	private JButton evaluarVendedores;
 	
 	
 	public MenuAdmin() {
@@ -42,28 +43,34 @@ public class MenuAdmin extends JFrame {
 		add(perfil);
 		
 		verLineas = new JButton("Ver Lineas");
-		verLineas.setBounds(220, 280, 150, 30);
+		verLineas.setBounds(220, 260, 150, 30);
 		verLineas.setFont(new Font("Tahoma", 0, 15));
 		verLineas.setActionCommand("ver_lineas");
 		add(verLineas);
 		
 		asignarLinea = new JButton("Asignar líneas");
-		asignarLinea.setBounds(220, 380, 150, 30);
+		asignarLinea.setBounds(220, 340, 150, 30);
 		asignarLinea.setFont(new Font("Tahoma", 0, 15));
 		asignarLinea.setActionCommand("asignar_linea");
 		add(asignarLinea);
 		
 		asignarPuntos = new JButton("Asignar puntos");
-		asignarPuntos.setBounds(220, 480, 150, 30);
+		asignarPuntos.setBounds(220, 420, 150, 30);
 		asignarPuntos.setFont(new Font("Tahoma", 0, 15));
 		asignarPuntos.setActionCommand("asignar_puntos");
 		add(asignarPuntos);		
 
 		calificarVendedor = new JButton("Calificar Vendedores");
-		calificarVendedor.setBounds(215, 580, 165, 30);
+		calificarVendedor.setBounds(215, 500, 165, 30);
 		calificarVendedor.setFont(new Font("Tahoma", 0, 15));
 		calificarVendedor.setActionCommand("calificar_vendedores");
 		add(calificarVendedor);
+		
+		evaluarVendedores = new JButton("Evaluar Vendedores");
+		evaluarVendedores.setBounds(215, 580, 165, 30);
+		evaluarVendedores.setFont(new Font("Tahoma", 0, 15));
+		evaluarVendedores.setActionCommand("evaluar_vendedores");
+		add(evaluarVendedores);
 		
 		setVisible(true);
 	}
@@ -91,5 +98,9 @@ public class MenuAdmin extends JFrame {
 	
 	public void buttonCalificarVendedores(ActionListener l){
 		calificarVendedor.addActionListener(l);
+	}
+	
+	public void buttonEvaluarVendedores(ActionListener l){
+		evaluarVendedores.addActionListener(l);
 	}
 }

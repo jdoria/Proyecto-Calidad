@@ -48,8 +48,8 @@ public class PAdministrador extends JFrame {
 		nombre.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(nombre);
 		
-		nombreAdmin = new JLabel(objetoAdmin.GetAdmin().getNombre());
-		nombreAdmin.setBounds(200, 320, 120, 30);
+		nombreAdmin = new JLabel("Juan");
+		nombreAdmin.setBounds(300, 320, 120, 30);
 		nombreAdmin.setFont(new Font("Tahoma", 0, 15));
 		add(nombreAdmin);
 		
@@ -59,8 +59,8 @@ public class PAdministrador extends JFrame {
 		add(apellido);
 		
 		apellidoAdmin = new JLabel();
-		apellidoAdmin.setText(objetoAdmin.GetAdmin().getApellido());
-		apellidoAdmin.setBounds(200, 370, 120, 30);
+		apellidoAdmin.setText("Doria");
+		apellidoAdmin.setBounds(300, 370, 120, 30);
 		apellidoAdmin.setFont(new Font("Tahoma", 0, 15));
 		add(apellidoAdmin);
 		
@@ -69,8 +69,8 @@ public class PAdministrador extends JFrame {
 		identificacion.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(identificacion);
 		
-		identifAdmin = new JLabel(objetoAdmin.GetAdmin().getIdentificación());
-		identifAdmin.setBounds(200, 420, 150, 30);
+		identifAdmin = new JLabel("1013667828");
+		identifAdmin.setBounds(300, 420, 150, 30);
 		identifAdmin.setFont(new Font("Tahoma", 0, 15));
 		add(identifAdmin);
 		

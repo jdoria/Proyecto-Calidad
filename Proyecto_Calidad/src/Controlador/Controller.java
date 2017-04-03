@@ -22,6 +22,7 @@ import dao.LineaDao;
 import dao.UsuarioDao;
 import Interfaz.Calificaciones;
 import Interfaz.CalificacionesAdmin;
+import Interfaz.EvaluarVendedores;
 
 public class Controller {
 	
@@ -42,6 +43,17 @@ public class Controller {
 	private LineaDao lineaDao = new LineaDao();
 	private String tNumPuntos;
 	private int numPuntos;
+	private String tCalificacion1;
+	private String tCalificacion2;
+	private String tCalificacion3;
+	private String tCalificacion4;
+	private String tCalificacion5;
+	private int calificacion1;
+	private int calificacion2;
+	private int calificacion3;
+	private int calificacion4;
+	private int calificacion5;
+	private EvaluarVendedores evaluar;
 	private UsuarioDao usuario = new UsuarioDao();
 	
 	public Controller(Principal interfaz) {
@@ -79,6 +91,7 @@ public class Controller {
 					administrador_interfaz_principal.buttonAsignarLineas(new listenerManejoDeEventosAdmin());
 					administrador_interfaz_principal.buttonAsignarPuntos(new listenerManejoDeEventosAdmin());
 					administrador_interfaz_principal.buttonCalificarVendedores(new listenerManejoDeEventosAdmin());
+					administrador_interfaz_principal.buttonEvaluarVendedores(new listenerManejoDeEventosAdmin());
 				}else{
 					JOptionPane.showMessageDialog(null, "ERROR DE AUTENTICACION", "ACCESO DENEGADO",
 							JOptionPane.ERROR_MESSAGE);
@@ -115,7 +128,7 @@ public class Controller {
 			// TODO Auto-generated method stub
 			if (e.getActionCommand().equals("perfil_usuario")) {
 				perfilVendedor = new PVendedor();	
-				perfilVendedor.buttonCalificaciones(new listenerPerfilVendedor());
+				perfilVendedor.buttonCalificaciones(new listenerVerCalificaciones());
 			}else if(e.getActionCommand().equals("ingresar_venta")){
 				System.out.println("jdnasjldnas");
 			}else if(e.getActionCommand().equals("ventas_realizadas")){
@@ -126,7 +139,7 @@ public class Controller {
 	}
 	
 
-	class listenerPerfilVendedor implements ActionListener {
+	class listenerVerCalificaciones implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -159,8 +172,26 @@ public class Controller {
 				seleccionarVendedor = new SeleccionarVendedor();
 				seleccionarVendedor.getIdVendedor();
 				seleccionarVendedor.buttonAsignar(new listenerCalificacionesAdmin());
+			}else if(e.getActionCommand().equals("evaluar_vendedores")){
+				evaluar = new EvaluarVendedores(); 
+				evaluar.buttonEvaluar(new listenerEvaluarVendedores());
 			}
 			
+		}
+		
+	}
+	
+	public class listenerEvaluarVendedores implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getActionCommand().equals("evaluar")) {
+				lineaDao = new LineaDao();
+				evaluar.setTextPromedio(Double.toString(lineaDao.evaluarVendedores(evaluar.getIdVendedor())));
+				
+				
+			}
 		}
 		
 	}
@@ -172,6 +203,35 @@ public class Controller {
 			// TODO Auto-generated method stub
 			//seleccionarVendedor.getIdVendedor();
 			calificacionesAdmin = new CalificacionesAdmin(seleccionarVendedor.getIdVendedor());
+			calificacionesAdmin.buttonCalificar(new listenerAsignarCalificaciones());
+			
+			
+		}
+		
+	}
+	
+	public class listenerAsignarCalificaciones implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub 
+			tCalificacion1 = calificacionesAdmin.getCuadro1();
+			calificacion1 = Integer.parseInt(tCalificacion1);
+			lineaDao.asignarCalificacion(calificacion1, calificacionesAdmin.getLinea1());
+			tCalificacion2 = calificacionesAdmin.getCuadro2();
+			calificacion2 = Integer.parseInt(tCalificacion2);
+			lineaDao.asignarCalificacion(calificacion2, calificacionesAdmin.getLinea2());
+			tCalificacion3 = calificacionesAdmin.getCuadro3();
+			calificacion3 = Integer.parseInt(tCalificacion3);
+			lineaDao.asignarCalificacion(calificacion3, calificacionesAdmin.getLinea3());
+			tCalificacion4 = calificacionesAdmin.getCuadro4();
+			calificacion4 = Integer.parseInt(tCalificacion4);
+			lineaDao.asignarCalificacion(calificacion4, calificacionesAdmin.getLinea4());
+			tCalificacion5 = calificacionesAdmin.getCuadro5();
+			calificacion5 = Integer.parseInt(tCalificacion5);
+			lineaDao.asignarCalificacion(calificacion5, calificacionesAdmin.getLinea5());
+			
+			
 			
 		}
 		

@@ -55,11 +55,13 @@ public class LineaDao {
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select nombre from linea where idVendedor1 = '"+idVendedor+"'";
+			query = "select nombre, numPuntos, calificacion from linea where idVendedor1 = '"+idVendedor+"'";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
 				Linea a = new Linea();
 				a.setNombre(rs.getString("nombre"));
+				a.setNumPuntos(rs.getInt("numPuntos"));
+				a.setCalificacion(rs.getInt("calificacion"));
 				lineas.add(a);
 				
 			}
@@ -71,6 +73,30 @@ public class LineaDao {
 		}
 	
 		return lineas;
+	}
+	
+	public double evaluarVendedores(String idVendedor){
+		double sumatoria = 0;
+		int suma_puntos_todas = 0;
+		LineaDao lineasVendedores = new LineaDao();
+		ArrayList<Linea> lineas = lineasVendedores.getLineaVendedor(idVendedor);
+		
+		for(int i=0; i<lineas.size();i++){
+			/**
+			 * promedio_vendedor = ((calificacion_linea1*puntos_linea1)+ 
+				(calificacion_linea2*puntos_linea2) + (calificacion_linea3*puntos_linea3) + 
+				(calificacion_linea4*puntos_linea5) + (calificacion_linea1*puntos_linea5))/suma_puntos_todas 
+				las_lineas
+			 */
+			System.out.println(lineas.get(i).getCalificacion());
+			System.out.println(lineas.get(i).getNumPuntos());
+			System.out.println(lineas.get(i).getNumPuntos());
+			sumatoria += lineas.get(i).getCalificacion() * lineas.get(i).getNumPuntos();
+			suma_puntos_todas += lineas.get(i).getNumPuntos();
+		}
+		System.out.println(sumatoria);
+		System.out.println(suma_puntos_todas);
+		return sumatoria / suma_puntos_todas;
 	}
 	
 	public void AsignarVendedor(String idVendedor, String nombreLinea){
@@ -105,5 +131,24 @@ public class LineaDao {
 		}
 		
 	}
+	
+
+	public void asignarCalificacion(int calificacion, String nombreLinea){
+		//Linea linea = new Linea();
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "UPDATE linea SET calificacion = '"+calificacion+"' WHERE Nombre = '"+nombreLinea+"'";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 }

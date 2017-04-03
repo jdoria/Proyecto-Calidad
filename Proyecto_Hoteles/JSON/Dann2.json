@@ -1,0 +1,109 @@
+{
+   "dann": {
+      "lugar": [
+         {
+            "habitacion": [
+               {
+                  "hotel": [
+                     {
+                        "precio": "325344",
+                        "caracteristicas": {
+                           "cantidad": "15",
+                           "tamano": "35 mts",
+                           "cama": "queen",
+                           "personas": "3"
+                        },
+                        "servicios": {
+                           "servicio": [
+                              "Restaurante y bar o salón lounge",
+                              "Gimnasio",
+                              "Lavandería autoservicio",
+                              "Salón de belleza"
+                           ]
+                        },
+                        "_nombre": "Dann Norte",
+                        "_direccion": "Avenida 15 No 112-09",
+                        "_telefono": "01-800-518-3793"
+                     },
+                     {
+                        "precio": "302337",
+                        "caracteristicas": {
+                           "cantidad": "25",
+                           "tamano": "32 mts",
+                           "cama": "queen",
+                           "personas": "2"
+                        },
+                        "servicios": {
+                           "servicio": [
+                              "Sauna",
+                              "Bar/lounge",
+                              "Habitación insonorizada"
+                           ]
+                        },
+                        "_nombre": "Casa Dann Carlton",
+                        "_direccion": "Calle 93B No. 19 - 44",
+                        "_telefono": "01-800-518-3793"
+                     }
+                  ],
+                  "_tipo": "suite"
+               },
+               {
+                  "hotel": [
+                     {
+                        "precio": "325344",
+                        "caracteristicas": {
+                           "cantidad": "55",
+                           "tamano": "25 mts",
+                           "cama": "doble",
+                           "personas": "2"
+                        },
+                        "servicios": {
+                           "servicio": [
+                              "Restaurante y bar o salón lounge",
+                              "Gimnasio",
+                              "Lavandería autoservicio"
+                           ]
+                        },
+                        "_nombre": "Dann Norte",
+                        "_direccion": "Avenida 15 No 112-09",
+                        "_telefono": "01-800-518-3793"
+                     }
+                  ],
+                  "_tipo": "ejecutiva"
+               }
+            ],
+            "_ciudad": "Bogotá",
+            "_pais": "Colombia"
+         },
+         {
+            "habitacion": [
+               {
+                  "hotel": [
+                     {
+                        "precio": "102337",
+                        "caracteristicas": {
+                           "cantidad": "55",
+                           "tamano": "18 mts",
+                           "cama": "semi",
+                           "personas": "1"
+                        },
+                        "servicios": {
+                           "servicio": [
+                              "Sauna",
+                              "Bar/lounge"
+                           ]
+                        },
+                        "_nombre": "Dann Carlton Belfort",
+                        "_direccion": "Calle 17 No 40B - 300",
+                        "_telefono": "01-800-518-3793"
+                     }
+                  ],
+                  "_tipo": "superior"
+               }
+            ],
+            "_ciudad": "Medellín",
+            "_pais": "Colombia"
+         }
+      ]
+   }
+}
