@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 
 public class Hotel {
+	private int idHotel;
+	private int idHabitaciones;
 	private String nombre;
 	private String direccion;
 	private String telefono;
@@ -27,8 +29,22 @@ public class Hotel {
 		
 	}
 
+	public int getIdHabitaciones() {
+		return idHabitaciones;
+	}
+	
+	public int getIdHotel() {
+		return idHotel;
+	}
 
-
+	public void setIdHabitaciones(int idHabitaciones) {
+		this.idHabitaciones = idHabitaciones;
+	}
+	
+	public void setIdHotel(int idHotel) {
+		this.idHotel = idHotel;
+	}
+	
 	public String getCiudad() {
 		return ciudad;
 	}
@@ -81,6 +97,13 @@ public class Hotel {
 		Habitacion habitacion = new Habitacion(tipo, cantidad, cama, tamaño, precio, numPersonas);
 		habitaciones.add(habitacion);
 	}
+	
+	public void crearHabitacion2(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas, ArrayList<Servicio> servicios){
+		Habitacion habitacion = new Habitacion(tipo, cantidad, cama, tamaño, precio, numPersonas);
+		habitacion.setServicios(servicios);
+		habitaciones.add(habitacion);
+	}
+
 	
 	public Habitacion buscarHabitacion(String tipo){//
 		Habitacion habitacion = null;

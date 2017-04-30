@@ -107,7 +107,7 @@ public class VistaCliente extends JFrame {
 			y2 = y2+210;
 			for (int j = 0; j < hotel.getHabitaciones().get(i).getServicios().size(); j++) {
 				serviciosHabitacion = new JLabel(hotel.getHabitaciones().get(i).getServicios().get(j).getDescripcion());
-				serviciosHabitacion.setBounds(400, y3=y3+20, 200, 30);
+				serviciosHabitacion.setBounds(400, y3=y3+20, 250, 30);
 				serviciosHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 				add(serviciosHabitacion);
 			}

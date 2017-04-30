@@ -3,6 +3,8 @@ package modelo;
 import java.util.ArrayList;
 
 public class Habitacion {
+	private int idHabitacion;
+	private int idServicios;
 	private String tipo;
 	private int cantidad;
 	private String cama;
@@ -24,6 +26,22 @@ public class Habitacion {
 		this.numPersonas = numPersonas;
 	}
 
+	public int getIdHabitacion() {
+		return idHabitacion;
+	}
+	
+	public int getIdServicios() {
+		return idServicios;
+	}
+	
+	public void setIdHabitacion(int idHabitacion) {
+		this.idHabitacion = idHabitacion;
+	}
+	
+	public void setIdServicios(int idServicios) {
+		this.idServicios = idServicios;
+	}
+	
 	public String getCama() {
 		return cama;
 	}

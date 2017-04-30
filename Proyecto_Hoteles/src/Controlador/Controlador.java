@@ -28,6 +28,7 @@ import Interfaz.Hotel.CrearHabitacion;
 import Interfaz.Hotel.EliminarHabitacion;
 import Interfaz.Hotel.ModificarHabitacion;
 import Interfaz.Hotel.VerHabitacion;
+import dao.AgenciaDAO;
 import modelo.Agencia;
 import modelo.Habitacion;
 import modelo.Hotel;
@@ -60,6 +61,7 @@ public class Controlador {
 	private CargaJSON cargaJson = new CargaJSON();
 	private MenuUsuario menuUsuario;
 	private VistaCliente vistaCliente;
+	private AgenciaDAO agenciaDao = new AgenciaDAO();
 	
 	public Controlador(Pantalla_Inicio interfaz) {
 		// TODO Auto-generated constructor stub
@@ -146,7 +148,7 @@ public class Controlador {
 				}
 			}else if(e.getActionCommand().equals("cargarJson")){
 				try {
-					agencia = cargaJson.cargar3(agencia);
+					agencia = cargaJson.cargar(agencia);
 					JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA JSON", JOptionPane.INFORMATION_MESSAGE);
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -162,8 +164,9 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			agencia.crearHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), 
-					 crearHotel.getCiudad(), crearHotel.getPais());
+			/*agencia.crearHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), 
+					 crearHotel.getCiudad(), crearHotel.getPais());*/
+			agenciaDao.adicionarHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), crearHotel.getCiudad(), crearHotel.getPais());
 			JOptionPane.showMessageDialog(null, "HOTEL CREADO CORRECTAMENTE", "CREAR HOTEL", JOptionPane.INFORMATION_MESSAGE);
 			
 			

@@ -3,13 +3,32 @@ package modelo;
 import java.util.ArrayList;
 
 public class Agencia {
+	
+	private int idAgencia;
 	private String nombre;
+	private int idHoteles;
 	ArrayList<Hotel> hoteles = new ArrayList<Hotel>();
 	
 	
 	public Agencia() {
 		// TODO Auto-generated constructor stub
 		
+	}
+	
+	public int getIdAgencia() {
+		return idAgencia;
+	}
+	
+	public int getIdHoteles() {
+		return idHoteles;
+	}
+	
+	public void setIdAgencia(int idAgencia) {
+		this.idAgencia = idAgencia;
+	}
+	
+	public void setIdHoteles(int idHoteles) {
+		this.idHoteles = idHoteles;
 	}
 	
 	public ArrayList<Hotel> getHoteles() {
@@ -21,7 +40,7 @@ public class Agencia {
 	}
 	
 	public void setHoteles(ArrayList<Hotel> hoteles) {
-		this.hoteles = hoteles;
+		this.hoteles.addAll(hoteles);
 	}
 	
 	public void setNombre(String nombre) {
