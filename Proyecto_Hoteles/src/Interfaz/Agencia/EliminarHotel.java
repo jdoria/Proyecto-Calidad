@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import modelo.Agencia;
+import dto.AgenciaDTO;
 
 public class EliminarHotel extends JFrame implements ActionListener {
 	
@@ -19,9 +19,9 @@ public class EliminarHotel extends JFrame implements ActionListener {
 	private ArrayList<String> listaHoteles = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private Agencia agencia = new Agencia();
+	private AgenciaDTO agencia = new AgenciaDTO();
 	
-	public EliminarHotel(Agencia agenciaPantalla) {
+	public EliminarHotel(AgenciaDTO agenciaPantalla) {
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(400, 400);

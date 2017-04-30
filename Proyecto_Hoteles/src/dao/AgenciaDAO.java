@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ConexionBD.Conexion;
-import modelo.Hotel;
+import dto.HotelDTO;
 
 public class AgenciaDAO {
 
@@ -14,8 +14,8 @@ public class AgenciaDAO {
 	private String query;
 	private ResultSet rs;
 	
-	public ArrayList<Hotel> GetHoteles(){
-		ArrayList<Hotel> hoteles = new ArrayList<>();
+	public ArrayList<HotelDTO> GetHoteles(){
+		ArrayList<HotelDTO> hoteles = new ArrayList<>();
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
@@ -23,7 +23,7 @@ public class AgenciaDAO {
 			query = "select idHotel, nombre, direccion, telefono, ciudad, pais from hotel;";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
-				Hotel a = new Hotel();
+				HotelDTO a = new HotelDTO();
 				a.setIdHotel(Integer.parseInt("idHotel"));
 				a.setNombre("nombre");
 				a.setDireccion("direccion");
@@ -42,12 +42,12 @@ public class AgenciaDAO {
 		return hoteles;
 	}
 	
-	public void adicionarHotel(String nombre, String direccion, String telefono, String ciudad, String pais){
+	public void adicionarHotel(HotelDTO hotel){
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "insert into hotel(nombre, direccion, telefono, ciudad, pais) values('"+nombre+"', '"+direccion+"', '"+telefono+"', '"+ciudad+"', '"+pais+"');";
+			query = "insert into hotel(nombre, direccion, telefono, ciudad, pais) values('"+hotel.getNombre()+"', '"+hotel.getDireccion()+"', '"+hotel.getTelefono()+"', '"+hotel.getCiudad()+"', '"+hotel.getPais()+"');";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		
@@ -58,12 +58,12 @@ public class AgenciaDAO {
 	
 	}
 	
-	public void modificarHotel(int idHotel, String nombre, String direccion, String telefono, String ciudad, String pais){
+	public void modificarHotel(HotelDTO hotel){
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "update hotel set nombre = '"+nombre+"', direccion = '"+direccion+"', telefono = '"+telefono+"', ciudad = '"+ciudad+"', pais = '"+pais+"' where idHotel = '"+idHotel+"'";
+			query = "update hotel set nombre = '"+hotel.getNombre()+"', direccion = '"+hotel.getDireccion()+"', telefono = '"+hotel.getTelefono()+"', ciudad = '"+hotel.getCiudad()+"', pais = '"+hotel.getPais()+"' where idHotel = '"+hotel.getIdHotel()+"'";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		
@@ -74,12 +74,12 @@ public class AgenciaDAO {
 	
 	}
 	
-	public void eliminarHotel(String nombre){
+	public void eliminarHotel(HotelDTO hotel){
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "delete from hotel where nombre = '"+nombre+"'";
+			query = "delete from hotel where nombre = '"+hotel.getNombre()+"'";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		

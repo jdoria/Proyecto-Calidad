@@ -1,10 +1,10 @@
-package modelo;
+package dto;
 
-public class Servicio {
+public class ServicioDTO {
 	private int idServicio;
 	private String descripcion;
 	
-	public Servicio() {
+	public ServicioDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	

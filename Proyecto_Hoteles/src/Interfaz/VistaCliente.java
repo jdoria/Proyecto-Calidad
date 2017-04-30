@@ -5,7 +5,7 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-import modelo.Hotel;
+import dto.HotelDTO;
 
 public class VistaCliente extends JFrame {
 	private int y1 = 50;
@@ -33,7 +33,7 @@ public class VistaCliente extends JFrame {
 	private int precio1;
 	
 	
-	public VistaCliente(Hotel hotel) {
+	public VistaCliente(HotelDTO hotel) {
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(800, 800);

@@ -1,9 +1,9 @@
-package modelo;
+package dto;
 
 import java.util.ArrayList;
 
 
-public class Hotel {
+public class HotelDTO {
 	private int idHotel;
 	private int idHabitaciones;
 	private String nombre;
@@ -11,16 +11,16 @@ public class Hotel {
 	private String telefono;
 	private String ciudad;
 	private String pais;
-	private ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+	private ArrayList<HabitacionDTO> habitaciones = new ArrayList<HabitacionDTO>();
 	
 	
-	public Hotel() {
+	public HotelDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 	
-	public Hotel(String nombre, String direccion, String telefono, String ciudad, String pais) {
+	public HotelDTO(String nombre, String direccion, String telefono, String ciudad, String pais) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
@@ -53,7 +53,7 @@ public class Hotel {
 		return direccion;
 	}
 	
-	public ArrayList<Habitacion> getHabitaciones() {
+	public ArrayList<HabitacionDTO> getHabitaciones() {
 		return habitaciones;
 	}
 	
@@ -77,7 +77,7 @@ public class Hotel {
 		this.direccion = direccion;
 	}
 	
-	public void setHabitaciones(ArrayList<Habitacion> habitaciones) {
+	public void setHabitaciones(ArrayList<HabitacionDTO> habitaciones) {
 		this.habitaciones = habitaciones;
 	}
 	
@@ -94,19 +94,19 @@ public class Hotel {
 	}
 	
 	public void crearHabitacion(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas){
-		Habitacion habitacion = new Habitacion(tipo, cantidad, cama, tamaño, precio, numPersonas);
+		HabitacionDTO habitacion = new HabitacionDTO(tipo, cantidad, cama, tamaño, precio, numPersonas);
 		habitaciones.add(habitacion);
 	}
 	
-	public void crearHabitacion2(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas, ArrayList<Servicio> servicios){
-		Habitacion habitacion = new Habitacion(tipo, cantidad, cama, tamaño, precio, numPersonas);
+	public void crearHabitacion2(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas, ArrayList<ServicioDTO> servicios){
+		HabitacionDTO habitacion = new HabitacionDTO(tipo, cantidad, cama, tamaño, precio, numPersonas);
 		habitacion.setServicios(servicios);
 		habitaciones.add(habitacion);
 	}
 
 	
-	public Habitacion buscarHabitacion(String tipo){//
-		Habitacion habitacion = null;
+	public HabitacionDTO buscarHabitacion(String tipo){//
+		HabitacionDTO habitacion = null;
 		for (int i = 0; i < habitaciones.size(); i++) {
 			if(habitaciones.get(i).getTipo() == tipo){
 				habitacion = habitaciones.get(i);

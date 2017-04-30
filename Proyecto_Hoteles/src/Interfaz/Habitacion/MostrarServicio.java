@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import modelo.Habitacion;
-import modelo.Servicio;
+import dto.HabitacionDTO;
+import dto.ServicioDTO;
 
 public class MostrarServicio extends JFrame {
 	
@@ -17,10 +17,10 @@ public class MostrarServicio extends JFrame {
 	private JLabel descripcionServicio;
 	private JLabel descripcion;
 	private JButton modificar;
-	private Habitacion habitacion;
-	private Servicio servicio;
+	private HabitacionDTO habitacion;
+	private ServicioDTO servicio;
 	
-	public MostrarServicio(Habitacion habitacionPantalla, String nombreSeleccion) {
+	public MostrarServicio(HabitacionDTO habitacionPantalla, String nombreSeleccion) {
 		// TODO Auto-generated constructor stub
 		habitacion = habitacionPantalla;
 

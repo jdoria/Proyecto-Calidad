@@ -12,8 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import modelo.Habitacion;
-import modelo.Hotel;
+import dto.HabitacionDTO;
+import dto.HotelDTO;
 
 public class VerServicios extends JFrame implements ActionListener {
 
@@ -24,9 +24,9 @@ public class VerServicios extends JFrame implements ActionListener {
 	private ArrayList<String> listaServicios = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private Habitacion habitacion = new Habitacion();
+	private HabitacionDTO habitacion = new HabitacionDTO();
 
-	public VerServicios(Habitacion habitacionPantalla) {
+	public VerServicios(HabitacionDTO habitacionPantalla) {
 		// TODO Auto-generated constructor stub
 		
 		setTitle("Proyecto Ingeniería de Software I");

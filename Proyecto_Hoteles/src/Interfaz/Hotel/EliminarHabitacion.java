@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import modelo.Hotel;
+import dto.HotelDTO;
 
 public class EliminarHabitacion extends JFrame implements ActionListener {
 	private JLabel presentacion;
@@ -18,9 +18,9 @@ public class EliminarHabitacion extends JFrame implements ActionListener {
 	private ArrayList<String> listaHabitaciones = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private Hotel hotel = new Hotel();
+	private HotelDTO hotel = new HotelDTO();
 
-	public EliminarHabitacion(Hotel hotelPantalla) {
+	public EliminarHabitacion(HotelDTO hotelPantalla) {
 		// TODO Auto-generated constructor stub
 
 		hotel = hotelPantalla;

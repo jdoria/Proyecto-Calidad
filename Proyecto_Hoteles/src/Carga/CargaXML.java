@@ -14,20 +14,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import modelo.Agencia;
-import modelo.Habitacion;
-import modelo.Hotel;
-import modelo.Servicio;
+import dto.AgenciaDTO;
+import dto.HabitacionDTO;
+import dto.HotelDTO;
+import dto.ServicioDTO;
 
 public class CargaXML {
 	
-	private Agencia agencia = new Agencia();
-	private Hotel hotel = new Hotel();
-	private ArrayList<Hotel> hoteles = new ArrayList<Hotel>();
-	private Habitacion habitacion = new Habitacion();
-	private Servicio servicio = new Servicio();
+	private AgenciaDTO agencia = new AgenciaDTO();
+	private HotelDTO hotel = new HotelDTO();
+	private ArrayList<HotelDTO> hoteles = new ArrayList<HotelDTO>();
+	private HabitacionDTO habitacion = new HabitacionDTO();
+	private ServicioDTO servicio = new ServicioDTO();
 	
-	public Agencia read() throws ParserConfigurationException, SAXException, IOException {
+	public AgenciaDTO read() throws ParserConfigurationException, SAXException, IOException {
 		File fXmlFile = new File("XML/NH.xml");
     	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -43,7 +43,7 @@ public class CargaXML {
     		Node nNodeHotel = nListHotel.item(i);
     		if (nNodeHotel.getNodeType() == Node.ELEMENT_NODE) {
     			Element eElementHotel = (Element) nNodeHotel;
-    			hotel = new Hotel();
+    			hotel = new HotelDTO();
     			hotel.setNombre(eElementHotel.getElementsByTagName("nombre").item(0).getTextContent());
     			hotel.setTelefono(eElementHotel.getElementsByTagName("telefono").item(0).getTextContent());
     			hotel.setDireccion(eElementHotel.getElementsByTagName("dirección").item(0).getTextContent());
@@ -59,7 +59,7 @@ public class CargaXML {
     				Node nNodeHabitacion = nListHabitacion.item(j);
         			if (nNodeHabitacion.getNodeType() == Node.ELEMENT_NODE) {
         				Element eElementHabitacion = (Element) nNodeHabitacion;
-        				habitacion = new Habitacion();
+        				habitacion = new HabitacionDTO();
         				habitacion.setTipo(eElementHabitacion.getAttribute("tipo"));
         				habitacion.setCantidad(Integer.parseInt(eElementHabitacion.getAttribute("cantidad")));
         				habitacion.setTamaño(eElementHabitacion.getAttribute("tamano"));
@@ -77,7 +77,7 @@ public class CargaXML {
         				Element eElementServicio = (Element) nNodeServicio;
         				int length = eElementServicio.getElementsByTagName("servicio").getLength();
         				for (int k = 0; k < length; k++) {
-        					servicio = new Servicio();
+        					servicio = new ServicioDTO();
 							servicio.setDescripcion(eElementServicio.getElementsByTagName("servicio").item(k).getTextContent());
 							hotel.getHabitaciones().get(j).crearServicio(servicio.getDescripcion());
 						}

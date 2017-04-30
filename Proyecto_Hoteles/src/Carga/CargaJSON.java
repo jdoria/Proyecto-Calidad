@@ -11,18 +11,18 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
 
-import modelo.Agencia;
-import modelo.Habitacion;
-import modelo.Hotel;
-import modelo.Servicio;
+import dto.AgenciaDTO;
+import dto.HabitacionDTO;
+import dto.HotelDTO;
+import dto.ServicioDTO;
 
 public class CargaJSON {
 	
-	private ArrayList<Hotel> hoteles = new ArrayList<>();
-	private Hotel hotel = new Hotel();
-	private Habitacion habitacion = new Habitacion();
-	private Servicio servicio = new Servicio();
-	private ArrayList<Servicio> servicios = new ArrayList<>();
+	private ArrayList<HotelDTO> hoteles = new ArrayList<>();
+	private HotelDTO hotel = new HotelDTO();
+	private HabitacionDTO habitacion = new HabitacionDTO();
+	private ServicioDTO servicio = new ServicioDTO();
+	private ArrayList<ServicioDTO> servicios = new ArrayList<>();
 	/*private String nombreHotel;
 	private String direccionHotel;
 	private String telefonoHotel;
@@ -84,7 +84,7 @@ public class CargaJSON {
 		
 	}
 	
-	public Agencia cargar(Agencia agencia) throws FileNotFoundException{
+	public AgenciaDTO cargar(AgenciaDTO agencia) throws FileNotFoundException{
 		FileInputStream fr = new FileInputStream("JSON/Dann2.json");
 		JsonReader reader = Json.createReader(fr);
 		JsonObject hotelesObject = reader.readObject();
@@ -101,12 +101,12 @@ public class CargaJSON {
 					
 					
 					servicios = new ArrayList<>();
-					hotel = new Hotel();
+					hotel = new HotelDTO();
 					
 					hotel.setNombre(hotelObject.getString("_nombre"));
 					hotel.setDireccion(hotelObject.getString("_direccion"));
 					hotel.setTelefono(hotelObject.getString("_telefono"));
-					habitacion = new Habitacion();
+					habitacion = new HabitacionDTO();
 					habitacion.setTipo(habitacionObject.getString("_tipo"));
 					habitacion.setPrecio(Integer.parseInt(hotelObject.getString("precio")));
 					JsonObject caracteristicasObject = hotelObject.getJsonObject("caracteristicas");
@@ -117,7 +117,7 @@ public class CargaJSON {
 					JsonObject servicioObject = hotelObject.getJsonObject("servicios");
 					JsonArray servicioArreglo = servicioObject.getJsonArray("servicio");
 					for(JsonValue jsonValue: servicioArreglo){
-						servicio = new Servicio();
+						servicio = new ServicioDTO();
 						servicio.setDescripcion((jsonValue.toString()));
 						servicios.add(servicio);
 					}
@@ -142,7 +142,7 @@ public class CargaJSON {
 	public static void main(String[] args) throws IOException {
 
 		CargaJSON c = new CargaJSON();
-		Agencia a = new Agencia();
+		AgenciaDTO a = new AgenciaDTO();
 		c.cargar3();
 		c.cargar(a);
 			

@@ -1,16 +1,16 @@
-package modelo;
+package dto;
 
 import java.util.ArrayList;
 
-public class Agencia {
+public class AgenciaDTO {
 	
 	private int idAgencia;
 	private String nombre;
 	private int idHoteles;
-	ArrayList<Hotel> hoteles = new ArrayList<Hotel>();
+	ArrayList<HotelDTO> hoteles = new ArrayList<HotelDTO>();
 	
 	
-	public Agencia() {
+	public AgenciaDTO() {
 		// TODO Auto-generated constructor stub
 		
 	}
@@ -31,7 +31,7 @@ public class Agencia {
 		this.idHoteles = idHoteles;
 	}
 	
-	public ArrayList<Hotel> getHoteles() {
+	public ArrayList<HotelDTO> getHoteles() {
 		return hoteles;
 	}
 	
@@ -39,7 +39,7 @@ public class Agencia {
 		return nombre;
 	}
 	
-	public void setHoteles(ArrayList<Hotel> hoteles) {
+	public void setHoteles(ArrayList<HotelDTO> hoteles) {
 		this.hoteles.addAll(hoteles);
 	}
 	
@@ -49,7 +49,7 @@ public class Agencia {
 	
 	
 	public void crearHotel(String nombre, String direccion, String telefono, String ciudad, String pais){
-		Hotel hotel = new Hotel(nombre, direccion, telefono, ciudad, pais);
+		HotelDTO hotel = new HotelDTO(nombre, direccion, telefono, ciudad, pais);
 		hoteles.add(hotel);
 		
 	}

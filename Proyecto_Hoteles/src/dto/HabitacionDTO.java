@@ -1,8 +1,8 @@
-package modelo;
+package dto;
 
 import java.util.ArrayList;
 
-public class Habitacion {
+public class HabitacionDTO {
 	private int idHabitacion;
 	private int idServicios;
 	private String tipo;
@@ -11,13 +11,13 @@ public class Habitacion {
 	private String tamaño;
 	private int precio;
 	private int numPersonas;
-	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+	private ArrayList<ServicioDTO> servicios = new ArrayList<ServicioDTO>();
 	
-	public Habitacion() {
+	public HabitacionDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Habitacion(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas) {
+	public HabitacionDTO(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas) {
 		this.tipo = tipo;
 		this.cantidad = cantidad;
 		this.cama = cama;
@@ -58,7 +58,7 @@ public class Habitacion {
 		return precio;
 	}
 	
-	public ArrayList<Servicio> getServicios() {
+	public ArrayList<ServicioDTO> getServicios() {
 		return servicios;
 	}
 	
@@ -86,7 +86,7 @@ public class Habitacion {
 		this.precio = precio;
 	}
 	
-	public void setServicios(ArrayList<Servicio> servicios) {
+	public void setServicios(ArrayList<ServicioDTO> servicios) {
 		this.servicios = servicios;
 	}
 	
@@ -100,7 +100,7 @@ public class Habitacion {
 
 	
 	public void crearServicio(String descripcion){
-		Servicio servicio = new Servicio();
+		ServicioDTO servicio = new ServicioDTO();
 		servicio.setDescripcion(descripcion);
 		servicios.add(servicio);
 		

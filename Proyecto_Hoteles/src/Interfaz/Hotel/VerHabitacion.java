@@ -12,7 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import modelo.Hotel;
+import dto.HotelDTO;
 
 public class VerHabitacion extends JFrame implements ActionListener{
 	
@@ -23,9 +23,9 @@ public class VerHabitacion extends JFrame implements ActionListener{
 	private ArrayList<String> listaHabitaciones = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private Hotel hotel = new Hotel();
+	private HotelDTO hotel = new HotelDTO();
 	
-	public VerHabitacion(Hotel hotelPantalla) {
+	public VerHabitacion(HotelDTO hotelPantalla) {
 		
 		hotel = hotelPantalla;
 		// TODO Auto-generated constructor stub

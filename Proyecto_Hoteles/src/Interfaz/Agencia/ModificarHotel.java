@@ -6,9 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-
-import modelo.Agencia;
-import modelo.Hotel;
+import dto.AgenciaDTO;
+import dto.HotelDTO;
 
 public class ModificarHotel extends JFrame {
 	
@@ -25,11 +24,11 @@ public class ModificarHotel extends JFrame {
 	private JLabel anuncio;
 	private JButton modificar;
 	private String telefonoPantalla;
-	private Agencia agencia = new Agencia();
-	private Hotel hotel;
+	private AgenciaDTO agencia = new AgenciaDTO();
+	private HotelDTO hotel;
 	
 	
-	public ModificarHotel(Agencia agenciaPantalla, String nombreSeleccion) {
+	public ModificarHotel(AgenciaDTO agenciaPantalla, String nombreSeleccion) {
 		// TODO Auto-generated constructor stub
 		
 		agencia = agenciaPantalla;

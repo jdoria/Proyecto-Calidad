@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ConexionBD.Conexion;
-import modelo.Habitacion;
+import dto.HabitacionDTO;
 
 
 public class HotelDAO {
@@ -15,8 +15,8 @@ public class HotelDAO {
 	private String query;
 	private ResultSet rs;
 	
-	public ArrayList<Habitacion> GetHabitaciones(){
-		ArrayList<Habitacion> habitaciones = new ArrayList<>();
+	public ArrayList<HabitacionDTO> GetHabitaciones(){
+		ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
@@ -24,7 +24,7 @@ public class HotelDAO {
 			query = "select idHabitacion, tipo, cantidad, cama, precio, tamaño, numPersonas from habitacion;";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
-				Habitacion a = new Habitacion();
+				HabitacionDTO a = new HabitacionDTO();
 				a.setIdHabitacion(Integer.parseInt("idHabitacion"));
 				a.setTipo("tipo");
 				a.setCantidad(Integer.parseInt("cantidad"));
@@ -44,12 +44,12 @@ public class HotelDAO {
 		return habitaciones;
 	}
 	
-	public void adicionarHabitacion(String tipo, int cantidad, String cama, int precio, String tamaño, int numPersonas){
+	public void adicionarHabitacion(HabitacionDTO habitacion){
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "insert into habitacion(tipo, cantidad, cama, precio, tamaño, numPersonas) values('"+tipo+"', '"+cantidad+"', '"+cama+"', '"+precio+"', '"+tamaño+"', '"+numPersonas+"');";
+			query = "insert into habitacion(tipo, cantidad, cama, precio, tamaño, numPersonas) values('"+habitacion.getTipo()+"', '"+habitacion.getCantidad()+"', '"+habitacion.getCama()+"', '"+habitacion.getPrecio()+"', '"+habitacion.getTamaño()+"', '"+habitacion.getNumPersonas()+"');";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		

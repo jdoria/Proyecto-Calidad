@@ -29,17 +29,17 @@ import Interfaz.Hotel.EliminarHabitacion;
 import Interfaz.Hotel.ModificarHabitacion;
 import Interfaz.Hotel.VerHabitacion;
 import dao.AgenciaDAO;
-import modelo.Agencia;
-import modelo.Habitacion;
-import modelo.Hotel;
+import dto.AgenciaDTO;
+import dto.HabitacionDTO;
+import dto.HotelDTO;
 
 @SuppressWarnings("unused")
 public class Controlador {
 	private String nombreHotel;
 	private String nombreHabitacion;
 	private Pantalla_Inicio principal;
-	private Agencia agencia= new Agencia();
-	private Hotel hotel = new Hotel();
+	private AgenciaDTO agencia= new AgenciaDTO();
+	private HotelDTO hotel = new HotelDTO();
 	private MenuAgencia menuAgencia;
 	private MenuHoteles menuHotel;
 	private CrearHotel crearHotel;
@@ -56,7 +56,7 @@ public class Controlador {
 	private MenuHabitaciones menuHabitacion;
 	private VerServicios verServicios;
 	private MostrarServicio mostrarServicio;
-	private Habitacion habitacion;
+	private HabitacionDTO habitacion;
 	private CargaXML cargaxml = new CargaXML();
 	private CargaJSON cargaJson = new CargaJSON();
 	private MenuUsuario menuUsuario;
@@ -139,7 +139,6 @@ public class Controlador {
 				
 			}else if(e.getActionCommand().equals("cargar")){
 				try {
-					//agencia = new Agencia();
 					agencia = cargaxml.read(); //TODO 
 					JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
 				} catch (ParserConfigurationException | SAXException | IOException e1) {
@@ -166,7 +165,10 @@ public class Controlador {
 			// TODO Auto-generated method stub
 			/*agencia.crearHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), 
 					 crearHotel.getCiudad(), crearHotel.getPais());*/
-			agenciaDao.adicionarHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), crearHotel.getCiudad(), crearHotel.getPais());
+			HotelDTO hotel1 = new HotelDTO();
+			hotel1.setNombre(crearHotel.getNombre()); hotel1.setDireccion(crearHotel.getDireccion()); hotel1.setTelefono(crearHotel.getTelefono());
+			hotel1.setCiudad(crearHotel.getCiudad()); hotel1.setPais(crearHotel.getPais());
+			agenciaDao.adicionarHotel(hotel1);
 			JOptionPane.showMessageDialog(null, "HOTEL CREADO CORRECTAMENTE", "CREAR HOTEL", JOptionPane.INFORMATION_MESSAGE);
 			
 			
