@@ -89,7 +89,8 @@ public class CargaJSON {
 		JsonReader reader = Json.createReader(fr);
 		JsonObject hotelesObject = reader.readObject();
 		reader.close();
-
+		int bandera = 0;
+		hotel = new HotelDTO();
 		JsonObject dannObject = hotelesObject.getJsonObject("dann");
 		JsonArray lugarArreglo = dannObject.getJsonArray("lugar");
 		for (JsonObject lugarObject : lugarArreglo.getValuesAs(JsonObject.class)) {
@@ -101,11 +102,28 @@ public class CargaJSON {
 					
 					
 					servicios = new ArrayList<>();
-					hotel = new HotelDTO();
 					
-					hotel.setNombre(hotelObject.getString("_nombre"));
-					hotel.setDireccion(hotelObject.getString("_direccion"));
-					hotel.setTelefono(hotelObject.getString("_telefono"));
+					for (int i = 0; i < hoteles.size(); i++) {
+						System.out.println(2);
+						if(hoteles.get(i).getNombre().equals(hotelObject.getString("_nombre"))){
+							hotel = hoteles.get(i);
+							bandera = 1;
+						}
+						
+					}
+					if(bandera == 0){
+						System.out.println(11);
+						hotel = new HotelDTO();
+						hotel.setNombre(hotelObject.getString("_nombre"));
+						hotel.setDireccion(hotelObject.getString("_direccion"));
+						hotel.setTelefono(hotelObject.getString("_telefono"));
+						hotel.setCiudad(lugarObject.getString("_ciudad"));
+						hotel.setPais(lugarObject.getString("_pais"));
+						
+					}else{
+						bandera = 0;
+					}
+					
 					habitacion = new HabitacionDTO();
 					habitacion.setTipo(habitacionObject.getString("_tipo"));
 					habitacion.setPrecio(Integer.parseInt(hotelObject.getString("precio")));
@@ -126,8 +144,6 @@ public class CargaJSON {
 					
 				}
 				
-				hotel.setCiudad(lugarObject.getString("_ciudad"));
-				hotel.setPais(lugarObject.getString("_pais"));
 				
 				hoteles.add(hotel);
 			}
@@ -138,7 +154,7 @@ public class CargaJSON {
 	}
 	
 
-
+/*
 	public static void main(String[] args) throws IOException {
 
 		CargaJSON c = new CargaJSON();
@@ -147,5 +163,5 @@ public class CargaJSON {
 		c.cargar(a);
 			
 	}	
-
+*/
 }

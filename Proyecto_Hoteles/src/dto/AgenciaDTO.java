@@ -70,5 +70,15 @@ public class AgenciaDTO {
 		}
 		
 	}
+	
+	public HotelDTO buscarHotel(String nombre){
+		HotelDTO hotel = new HotelDTO();
+		for (int i = 0; i < hoteles.size(); i++) {
+			if(hoteles.get(i).getNombre().equals(nombre)){
+				return hoteles.get(i);
+			}
+		}
+		return hotel;
+	}
 
 }

@@ -68,7 +68,7 @@ public class HotelDAO {
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "update habitacion set tipo = '"+habitacion.getTipo()+"', cantidad = '"+habitacion.getCantidad()+"', canma = '"+habitacion.getCama()+"', precio = '"+habitacion.getPrecio()+"', tamaño = '"+habitacion.getTamaño()+"', numPersonas = '"+habitacion.getNumPersonas()+"' where idHabitacion = '"+habitacion.getIdHabitacion()+"'";
+			query = "update habitacion set tipo = '"+habitacion.getTipo()+"', cantidad = '"+habitacion.getCantidad()+"', cama = '"+habitacion.getCama()+"', precio = '"+habitacion.getPrecio()+"', tamaño = '"+habitacion.getTamaño()+"', numPersonas = '"+habitacion.getNumPersonas()+"' where idHabitacion = '"+habitacion.getIdHabitacion()+"'";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		
