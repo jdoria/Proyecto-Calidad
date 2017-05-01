@@ -6,7 +6,6 @@ public class AgenciaDTO {
 	
 	private int idAgencia;
 	private String nombre;
-	private int idHoteles;
 	ArrayList<HotelDTO> hoteles = new ArrayList<HotelDTO>();
 	
 	
@@ -19,16 +18,8 @@ public class AgenciaDTO {
 		return idAgencia;
 	}
 	
-	public int getIdHoteles() {
-		return idHoteles;
-	}
-	
 	public void setIdAgencia(int idAgencia) {
 		this.idAgencia = idAgencia;
-	}
-	
-	public void setIdHoteles(int idHoteles) {
-		this.idHoteles = idHoteles;
 	}
 	
 	public ArrayList<HotelDTO> getHoteles() {

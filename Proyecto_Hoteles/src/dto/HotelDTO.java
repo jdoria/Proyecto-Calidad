@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class HotelDTO {
 	private int idHotel;
-	private int idHabitaciones;
+	private int idAgencia1;
 	private String nombre;
 	private String direccion;
 	private String telefono;
@@ -30,7 +30,7 @@ public class HotelDTO {
 	}
 
 	public int getIdHabitaciones() {
-		return idHabitaciones;
+		return idAgencia1;
 	}
 	
 	public int getIdHotel() {
@@ -38,7 +38,7 @@ public class HotelDTO {
 	}
 
 	public void setIdHabitaciones(int idHabitaciones) {
-		this.idHabitaciones = idHabitaciones;
+		this.idAgencia1 = idHabitaciones;
 	}
 	
 	public void setIdHotel(int idHotel) {
