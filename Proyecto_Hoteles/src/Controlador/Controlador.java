@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Action;
 import javax.swing.JFileChooser;
@@ -29,9 +30,11 @@ import Interfaz.Hotel.EliminarHabitacion;
 import Interfaz.Hotel.ModificarHabitacion;
 import Interfaz.Hotel.VerHabitacion;
 import dao.AgenciaDAO;
+import dao.HotelDAO;
 import dto.AgenciaDTO;
 import dto.HabitacionDTO;
 import dto.HotelDTO;
+import negocio.Agencia;
 
 @SuppressWarnings("unused")
 public class Controlador {
@@ -61,7 +64,10 @@ public class Controlador {
 	private CargaJSON cargaJson = new CargaJSON();
 	private MenuUsuario menuUsuario;
 	private VistaCliente vistaCliente;
-	private AgenciaDAO agenciaDao = new AgenciaDAO();
+	private Agencia agenciaNegocio = new Agencia();
+	private AgenciaDAO agenciaDAO = new AgenciaDAO();
+	private ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
+	private HotelDAO hotelDAO = new HotelDAO();
 	
 	public Controlador(Pantalla_Inicio interfaz) {
 		// TODO Auto-generated constructor stub
@@ -100,7 +106,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			verHotel = new VerHotel(agencia);
+			verHotel = new VerHotel();
 			verHotel.buttonVer(new listenerVerHotelCliente());
 		}
 	}
@@ -108,14 +114,9 @@ public class Controlador {
 	public class listenerVerHotelCliente implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			for (int i = 0; i < agencia.getHoteles().size(); i++) {
-				if(agencia.getHoteles().get(i).getNombre()==verHotel.getNombreHotel()){
-					hotel = agencia.getHoteles().get(i);
-				}
-				
-			}
-			vistaCliente = new VistaCliente(hotel);
+			// TODO Auto-generated method stud
+			habitaciones = hotelDAO.GetHabitaciones(verHotel.getIdHotel());
+			vistaCliente = new VistaCliente(habitaciones);
 		}
 	}
 	
@@ -128,27 +129,37 @@ public class Controlador {
 				crearHotel = new CrearHotel();
 				crearHotel.buttonCrear(new listenerCrearHotel());
 			}else if(e.getActionCommand().equals("mostrarHoteles")){
-				verHotel = new VerHotel(agencia);
+				verHotel = new VerHotel();
 				verHotel.buttonVer(new listenerMostrarHotel());
 			}else if(e.getActionCommand().equals("modificarHoteles")){
-				verHotel = new VerHotel(agencia);
+				verHotel = new VerHotel();
 				verHotel.buttonVer(new listenerModificarHotel());
 			}else if(e.getActionCommand().equals("eliminarHotel")){
-				eliminarHotel = new EliminarHotel(agencia);
+				eliminarHotel = new EliminarHotel();
 				eliminarHotel.buttonVer(new listenerEliminarHotel());
 				
 			}else if(e.getActionCommand().equals("cargar")){
 				try {
-					agencia = cargaxml.read(); //TODO 
-					JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
+					if(agenciaDAO.GetHoteles().size()==0){
+						agencia = cargaxml.read(); //TODO 
+						JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
+					}else{
+						JOptionPane.showMessageDialog(null, "EL ARCHIVO YA FUE CARGADO", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
+					}
+					
 				} catch (ParserConfigurationException | SAXException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}else if(e.getActionCommand().equals("cargarJson")){
 				try {
-					agencia = cargaJson.cargar(agencia);
-					JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA JSON", JOptionPane.INFORMATION_MESSAGE);
+					if(agenciaDAO.GetHoteles().size()==0){
+						agencia = cargaJson.cargar(agencia);
+						JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
+					}else{
+						JOptionPane.showMessageDialog(null, "EL ARCHIVO YA FUE CARGADO", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
+					}
+					
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -165,10 +176,7 @@ public class Controlador {
 			// TODO Auto-generated method stub
 			/*agencia.crearHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), 
 					 crearHotel.getCiudad(), crearHotel.getPais());*/
-			HotelDTO hotel1 = new HotelDTO();
-			hotel1.setNombre(crearHotel.getNombre()); hotel1.setDireccion(crearHotel.getDireccion()); hotel1.setTelefono(crearHotel.getTelefono());
-			hotel1.setCiudad(crearHotel.getCiudad()); hotel1.setPais(crearHotel.getPais());
-			agenciaDao.adicionarHotel(hotel1);
+			agenciaNegocio.adicionarHotel(crearHotel.getNombre(), crearHotel.getDireccion(), crearHotel.getTelefono(), crearHotel.getCiudad(), crearHotel.getPais());
 			JOptionPane.showMessageDialog(null, "HOTEL CREADO CORRECTAMENTE", "CREAR HOTEL", JOptionPane.INFORMATION_MESSAGE);
 			
 			
@@ -194,7 +202,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			modificarHotel = new ModificarHotel(verHotel.getAgencia(), verHotel.getNombreHotel());
+			modificarHotel = new ModificarHotel(verHotel.getNombreHotel());
 			modificarHotel.buttonModificar(new listenerModificacion());
 			
 		}
@@ -204,8 +212,8 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			agencia.modificarHotel(modificarHotel.getNombre(), modificarHotel.getDireccion(),
-					modificarHotel.getTelefono(), modificarHotel.getCiudad(), modificarHotel.getPais());
+			agenciaNegocio.modificarHotel(modificarHotel.getNombre(), modificarHotel.getDireccion(),
+					modificarHotel.getTelefono(), modificarHotel.getCiudad(), modificarHotel.getPais(), modificarHotel.getIdHotel());
 			JOptionPane.showMessageDialog(null, "HOTEL MODIFICADO CORRECTAMENTE", "MODIFICAR HOTEL", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
@@ -215,7 +223,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			agencia.eliminarHotel(eliminarHotel.getHotel());
+			agenciaNegocio.eliminarHotel(eliminarHotel.getHotel(), eliminarHotel.getIdHotel());
 			JOptionPane.showMessageDialog(null, "HOTEL ELIMINADO CORRECTAMENTE", "ELIMINAR HOTEL", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
@@ -229,24 +237,14 @@ public class Controlador {
 				crearHabitacion = new CrearHabitacion();
 				crearHabitacion.buttonCrear(new listenerCrearHabitacion());
 			}else if(e.getActionCommand().equals("mostrarHabitaciones")){
-				for(int i= 0; i<agencia.getHoteles().size(); i++){
-					if(verHotel.getNombreHotel().equals(agencia.getHoteles().get(i).getNombre())){
-						hotel = agencia.getHoteles().get(i);
-					}
-				}
-				verHabitacion = new VerHabitacion(hotel);
+				verHabitacion = new VerHabitacion(verHotel.getIdHotel());
 				//System.out.println(hotel.getHabitaciones().size());
 				verHabitacion.buttonVer(new listenerMostrarHabitacion());
 			}else if(e.getActionCommand().equals("modificarHabitaciones")){
-				for(int i= 0; i<agencia.getHoteles().size(); i++){
-					if(verHotel.getNombreHotel().equals(agencia.getHoteles().get(i).getNombre())){
-						hotel = agencia.getHoteles().get(i);
-					}
-				}
-				verHabitacion = new VerHabitacion(hotel);
+				verHabitacion = new VerHabitacion(verHotel.getIdHotel());
 				verHabitacion.buttonVer(new listenerModificarHabitacion());
 			}else if(e.getActionCommand().equals("eliminarHabitacion")){
-				eliminarHabitacion = new EliminarHabitacion(hotel);
+				eliminarHabitacion = new EliminarHabitacion(verHotel.getIdHotel());
 				eliminarHabitacion.buttonEliminar(new listenerEliminarHabitacion());
 			}
 		}
@@ -256,18 +254,9 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			for(int i = 0; i < agencia.getHoteles().size(); i++){
-				if(agencia.getHoteles().get(i).getNombre().equals(nombreHotel)){
-					hotel = agencia.getHoteles().get(i);
-				}
-			}
-			hotel.crearHabitacion(crearHabitacion.getTipo(), Integer.parseInt(crearHabitacion.getCantidad()),crearHabitacion.getCama(), 
+			agenciaNegocio.adicionarHabitacion(verHotel.getIdHotel(), crearHabitacion.getTipo(), Integer.parseInt(crearHabitacion.getCantidad()),crearHabitacion.getCama(), 
 					crearHabitacion.getTamaño(), Integer.parseInt(crearHabitacion.getPrecio()), Integer.parseInt(crearHabitacion.getNumPersonas()));
 			JOptionPane.showMessageDialog(null, "HABITACION CREADA CORRECTAMENTE", "CREAR HABITACION", JOptionPane.INFORMATION_MESSAGE);
-			/*for (int i = 0; i < hotel.getHabitaciones().size(); i++) {
-				System.out.println(hotel.getHabitaciones().get(i).getTipo());
-				
-			}*/
 		}
 	}
 	
@@ -275,12 +264,8 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			for(int i = 0; i < agencia.getHoteles().size(); i++){
-				if(agencia.getHoteles().get(i).getNombre().equals(nombreHotel)){
-					hotel = agencia.getHoteles().get(i);
-				}
-			}
-			modificarHabitacion = new ModificarHabitacion(hotel, verHabitacion.getHabitacion());
+			
+			modificarHabitacion = new ModificarHabitacion(verHabitacion.getHabitacion(), verHotel.getIdHotel());
 			modificarHabitacion.buttonModificar(new listenerModificacionHabitacion());
 		}
 	}
@@ -289,7 +274,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			hotel.modificarHabitacion(modificarHabitacion.getTipo(), Integer.parseInt(modificarHabitacion.getCantidad()),modificarHabitacion.getCama(), 
+			agenciaNegocio.modificarHabitacion(verHabitacion.getIdHabitacion(), modificarHabitacion.getTipo(), Integer.parseInt(modificarHabitacion.getCantidad()),modificarHabitacion.getCama(), 
 					modificarHabitacion.getTamaño(), Integer.parseInt(modificarHabitacion.getPrecio()), Integer.parseInt(modificarHabitacion.getNumPersonas()));
 			JOptionPane.showMessageDialog(null, "HABITACION MODIFICADA CORRECTAMENTE", "MODIFICAR HABITACION", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -299,7 +284,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			hotel.eliminarHabitacion(eliminarHabitacion.getHabitacion());
+			agenciaNegocio.eliminarHabitacion(eliminarHabitacion.getIdHabitacion());
 			JOptionPane.showMessageDialog(null, "HABITACION ELIMINADA CORRECTAMENTE", "ELIMINAR HABITACION", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
@@ -330,30 +315,14 @@ public class Controlador {
 				crearServicio = new CrearServicio();
 				crearServicio.buttonCrear(new listenerCrearServicio());
 			}else if(e.getActionCommand().equals("mostrarServicio")){
-				for(int i=0; i<agencia.getHoteles().size(); i++){
-					for(int j=0; j<agencia.getHoteles().get(i).getHabitaciones().size();j++){
-						if(verHabitacion.getHabitacion().equals(agencia.getHoteles().get(i).getHabitaciones().get(j).getTipo())){
-							habitacion = agencia.getHoteles().get(i).getHabitaciones().get(j);
-					}
-					
-					}
-				}
 				
-				verServicios = new VerServicios(habitacion);
+				verServicios = new VerServicios(verHabitacion.getIdHabitacion());
 				verServicios.buttonVer(new listenerMostrarServicio());
 			}else if(e.getActionCommand().equals("modificarServicio")){
-				for(int i=0; i<agencia.getHoteles().size(); i++){
-					for(int j=0; j<agencia.getHoteles().get(i).getHabitaciones().size();j++){
-						if(verHabitacion.getHabitacion().equals(agencia.getHoteles().get(i).getHabitaciones().get(j).getTipo())){
-							habitacion = agencia.getHoteles().get(i).getHabitaciones().get(j);
-					}
-					
-					}
-				}
-				verServicios = new VerServicios(habitacion);
+				verServicios = new VerServicios(verHabitacion.getIdHabitacion());
 				verServicios.buttonVer(new listenerModificarServicio());
 			}else if(e.getActionCommand().equals("eliminarServicio")){
-				eliminarServicio = new EliminarServicio(habitacion);
+				eliminarServicio = new EliminarServicio(verHabitacion.getIdHabitacion());
 				eliminarServicio.buttonVer(new listenerEliminarServicio());
 			}
 			
@@ -364,7 +333,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			mostrarServicio = new MostrarServicio(habitacion, verServicios.getServicio());
+			mostrarServicio = new MostrarServicio(verServicios.getServicio(), verHabitacion.getIdHabitacion());
 			
 		}
 	}
@@ -373,12 +342,8 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			for (int i = 0; i < hotel.getHabitaciones().size(); i++) {
-				if(hotel.getHabitaciones().get(i).getTipo().equals(nombreHabitacion)){
-					habitacion = hotel.getHabitaciones().get(i);
-				}
-			}
-			habitacion.crearServicio(crearServicio.getDescripcion());
+			
+			agenciaNegocio.adicionarServicio(crearServicio.getDescripcion(), verHabitacion.getIdHabitacion());
 			JOptionPane.showMessageDialog(null, "SERVICIO CREADO CORRECTAMENTE", "CREAR SERVICIO", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
@@ -387,13 +352,8 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			for (int i = 0; i < hotel.getHabitaciones().size(); i++) {
-				if(hotel.getHabitaciones().get(i).getTipo().equals(nombreHabitacion)){
-					habitacion = hotel.getHabitaciones().get(i);
-				}
-			}
 			
-			modificarServicio = new ModificarServicio(habitacion, verServicios.getServicio());
+			modificarServicio = new ModificarServicio(verServicios.getServicio(), verHabitacion.getIdHabitacion());
 			modificarServicio.buttonModificar(new listenerModificacionServicio());
 			
 		}
@@ -404,7 +364,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			habitacion.modificarServicio(modificarServicio.getDescripcion(), verServicios.getServicio());
+			agenciaNegocio.modificarServicio(modificarServicio.getDescripcion(), modificarServicio.getIdServicio());
 			JOptionPane.showMessageDialog(null, "SERVICIO MODIFICADO CORRECTAMENTE", "MODIFICAR SERVICIO", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
@@ -413,7 +373,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			habitacion.eliminarServicio(eliminarServicio.getServicio());
+			agenciaNegocio.eliminarServicio(eliminarServicio.getServicio(), eliminarServicio.getIdServicio());
 			JOptionPane.showMessageDialog(null, "SERVICIO ELIMINADO CORRECTAMENTE", "ELIMINAR SERVICIO", JOptionPane.INFORMATION_MESSAGE);
 			
 		}

@@ -2,10 +2,14 @@ package Interfaz;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
+import dao.HabitacionDAO;
+import dto.HabitacionDTO;
 import dto.HotelDTO;
+import dto.ServicioDTO;
 
 public class VistaCliente extends JFrame {
 	private int y1 = 50;
@@ -31,9 +35,11 @@ public class VistaCliente extends JFrame {
 	private String precioPantalla;
 	private String numPersonasPantalla;
 	private int precio1;
+	HabitacionDAO habitacionDAO = new HabitacionDAO();
+	ArrayList<ServicioDTO> servicios = new ArrayList<>();
 	
 	
-	public VistaCliente(HotelDTO hotel) {
+	public VistaCliente(ArrayList<HabitacionDTO> habitaciones) {
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(800, 800);
@@ -43,8 +49,8 @@ public class VistaCliente extends JFrame {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		for (int i = 0; i < hotel.getHabitaciones().size(); i++) {
-			precio1 = hotel.getHabitaciones().get(i).getPrecio();
+		for (int i = 0; i < habitaciones.size(); i++) {
+			precio1 = habitaciones.get(i).getPrecio();
 			precio1 = (int) ((precio1*0.3)+precio1);
 			precio1 = (int) ((precio1*0.1)+precio1);
 			habitacion = new JLabel("Habitacion. ");
@@ -75,19 +81,19 @@ public class VistaCliente extends JFrame {
 			numPersonas.setBounds(70, y=y+20, 100, 30);
 			numPersonas.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(numPersonas);
-			tipoHabitacion = new JLabel(hotel.getHabitaciones().get(i).getTipo());
+			tipoHabitacion = new JLabel(habitaciones.get(i).getTipo());
 			tipoHabitacion.setBounds(170, y1=y1+60, 100, 30);
 			tipoHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(tipoHabitacion);
-			cantidadHabitacion = new JLabel(cantidadPantalla = String.valueOf(hotel.getHabitaciones().get(i).getCantidad()));
+			cantidadHabitacion = new JLabel(cantidadPantalla = String.valueOf(habitaciones.get(i).getCantidad()));
 			cantidadHabitacion.setBounds(170, y1=y1+20, 100, 30);
 			cantidadHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(cantidadHabitacion);
-			camaHabitacion = new JLabel(hotel.getHabitaciones().get(i).getCama());
+			camaHabitacion = new JLabel(habitaciones.get(i).getCama());
 			camaHabitacion.setBounds(170, y1=y1+20, 100, 30);
 			camaHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(camaHabitacion);
-			tamañoHabitacion = new JLabel(hotel.getHabitaciones().get(i).getTamaño());
+			tamañoHabitacion = new JLabel(habitaciones.get(i).getTamaño());
 			tamañoHabitacion.setBounds(170, y1=y1+20, 100, 30);
 			tamañoHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(tamañoHabitacion);
@@ -95,7 +101,7 @@ public class VistaCliente extends JFrame {
 			precioHabitacion.setBounds(170, y1=y1+20, 100, 30);
 			precioHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(precioHabitacion);
-			numPersonasHabitacion = new JLabel(numPersonasPantalla = String.valueOf(hotel.getHabitaciones().get(i).getNumPersonas()));
+			numPersonasHabitacion = new JLabel(numPersonasPantalla = String.valueOf(habitaciones.get(i).getNumPersonas()));
 			numPersonasHabitacion.setBounds(170, y1=y1+20, 100, 30);
 			numPersonasHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 			add(numPersonasHabitacion);
@@ -105,8 +111,9 @@ public class VistaCliente extends JFrame {
 			servicio.setFont(new Font("Tahoma", Font.BOLD, 17));
 			add(servicio);
 			y2 = y2+210;
-			for (int j = 0; j < hotel.getHabitaciones().get(i).getServicios().size(); j++) {
-				serviciosHabitacion = new JLabel(hotel.getHabitaciones().get(i).getServicios().get(j).getDescripcion());
+			servicios = habitacionDAO.GetServicios(habitaciones.get(i).getIdHabitacion());
+			for (int j = 0; j < servicios.size(); j++) {
+				serviciosHabitacion = new JLabel(servicios.get(j).getDescripcion());
 				serviciosHabitacion.setBounds(400, y3=y3+20, 250, 30);
 				serviciosHabitacion.setFont(new Font("Tahoma", Font.BOLD, 15));
 				add(serviciosHabitacion);

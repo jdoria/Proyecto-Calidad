@@ -24,12 +24,12 @@ public class AgenciaDAO {
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
 				HotelDTO a = new HotelDTO();
-				a.setIdHotel(Integer.parseInt("idHotel"));
-				a.setNombre("nombre");
-				a.setDireccion("direccion");
-				a.setTelefono("telefono");
-				a.setCiudad("ciudad");
-				a.setPais("pais");
+				a.setIdHotel(Integer.parseInt(rs.getString("idHotel")));
+				a.setNombre(rs.getString("nombre"));
+				a.setDireccion(rs.getString("direccion"));
+				a.setTelefono(rs.getString("telefono"));
+				a.setCiudad(rs.getString("ciudad"));
+				a.setPais(rs.getString("pais"));
 				hoteles.add(a);
 				
 			}
@@ -78,8 +78,68 @@ public class AgenciaDAO {
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
+			ArrayList<Integer> lista = new ArrayList<>();
+			lista = getHabitacionById(hotel.getIdHotel());
+			for (int i = 0; i <lista.size(); i++) {
+				eliminarServiciosHabitacion(lista.get(i));
+			}			
+			eliminarHabitaciones(hotel.getIdHotel());
 			sentencia = conexion.conectar().createStatement();
 			query = "delete from hotel where nombre = '"+hotel.getNombre()+"'";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	private void eliminarHabitaciones(int idHotel){
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "delete from habitacion where idHotel1 = '"+idHotel+"'";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	private ArrayList<Integer> getHabitacionById(int idHotel) {
+		ArrayList<Integer> lista = new ArrayList<>();
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "select idHabitacion from habitacion where idHotel1 = '"+idHotel+"'";
+			rs = sentencia.executeQuery(query);
+			while(rs.next()){
+				lista.add(Integer.parseInt(rs.getString("idHabitacion")));
+			}
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	
+	private void eliminarServiciosHabitacion(int idHabitacion) {
+		// SENTENCIA
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "delete from servicio where idHabitacion1 = '"+idHabitacion+"'";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		

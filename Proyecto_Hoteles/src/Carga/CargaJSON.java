@@ -23,18 +23,7 @@ public class CargaJSON {
 	private HabitacionDTO habitacion = new HabitacionDTO();
 	private ServicioDTO servicio = new ServicioDTO();
 	private ArrayList<ServicioDTO> servicios = new ArrayList<>();
-	/*private String nombreHotel;
-	private String direccionHotel;
-	private String telefonoHotel;
-	private String ciudadHotel;
-	private String paisHotel;
-	private String tipoHabitacion;
-	private int cantidadHabitacion;
-	private String camaHabitacion;
-	private String tamañoHabitacion;
-	private Float precioHabitacion;
-	private int numPersonasHabitacion;
-	private String descripcionServicio;*/
+	private CargaBD carga = new CargaBD();
 
 
 	public void cargar3() throws FileNotFoundException{
@@ -100,26 +89,22 @@ public class CargaJSON {
 				JsonArray hotelArreglo = habitacionObject.getJsonArray("hotel");
 				for(JsonObject hotelObject : hotelArreglo.getValuesAs(JsonObject.class)){
 					
-					
 					servicios = new ArrayList<>();
-					
-					for (int i = 0; i < hoteles.size(); i++) {
-						System.out.println(2);
-						if(hoteles.get(i).getNombre().equals(hotelObject.getString("_nombre"))){
-							hotel = hoteles.get(i);
+				
+					for (int i = 0; i <agencia.getHoteles().size(); i++) {
+						if(agencia.getHoteles().get(i).getNombre().equals(hotelObject.getString("_nombre"))){
+							hotel = agencia.getHoteles().get(i);
 							bandera = 1;
 						}
 						
 					}
 					if(bandera == 0){
-						System.out.println(11);
 						hotel = new HotelDTO();
 						hotel.setNombre(hotelObject.getString("_nombre"));
 						hotel.setDireccion(hotelObject.getString("_direccion"));
 						hotel.setTelefono(hotelObject.getString("_telefono"));
 						hotel.setCiudad(lugarObject.getString("_ciudad"));
-						hotel.setPais(lugarObject.getString("_pais"));
-						
+						hotel.setPais(lugarObject.getString("_pais"));		
 					}else{
 						bandera = 0;
 					}
@@ -144,12 +129,13 @@ public class CargaJSON {
 					
 				}
 				
-				
-				hoteles.add(hotel);
+				agencia.getHoteles().add(hotel);
+				//hoteles.add(hotel);
 			}
 			
 		}
-		agencia.setHoteles(hoteles);
+		//agencia.setHoteles(hoteles);
+		carga.cargar(agencia);
 		return agencia;
 	}
 	

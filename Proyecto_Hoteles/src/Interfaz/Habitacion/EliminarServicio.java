@@ -12,7 +12,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dao.HabitacionDAO;
 import dto.HabitacionDTO;
+import dto.ServicioDTO;
 
 public class EliminarServicio extends JFrame implements ActionListener{
 	
@@ -23,9 +25,11 @@ public class EliminarServicio extends JFrame implements ActionListener{
 	private ArrayList<String> listaServicios = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private HabitacionDTO habitacion = new HabitacionDTO();
+	private ArrayList<ServicioDTO> servicios = new ArrayList<>();
+	private HabitacionDAO habitacionDAO = new HabitacionDAO();
+	private int idServicio= 0;
 	
-	public EliminarServicio(HabitacionDTO habitacionPantalla) {
+	public EliminarServicio(int idHabitacion) {
 		// TODO Auto-generated constructor stub
 		
 		setTitle("Proyecto Ingeniería de Software I");
@@ -36,10 +40,10 @@ public class EliminarServicio extends JFrame implements ActionListener{
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		habitacion = habitacionPantalla;
+		servicios = habitacionDAO.GetServicios(idHabitacion);
 
-		for (int i = 0; i < habitacion.getServicios().size(); i++) {
-			listaServicios.add(habitacion.getServicios().get(i).getDescripcion());
+		for (int i = 0; i < servicios.size(); i++) {
+			listaServicios.add(servicios.get(i).getDescripcion());
 			mlista.addElement(listaServicios.get(i));
 		}
 
@@ -75,6 +79,10 @@ public class EliminarServicio extends JFrame implements ActionListener{
 	public void buttonVer(ActionListener l) {
 		eliminar.addActionListener(l);
 	}
+	
+	public int getIdServicio(){
+		return idServicio;
+	}
 
 	public String getServicio() {
 		return msg.getText();
@@ -88,7 +96,8 @@ public class EliminarServicio extends JFrame implements ActionListener{
 			String msg1 = (String) cb.getSelectedItem();
 			for (int i = 0; i < listaServicios.size(); i++) {
 				if (listaServicios.get(i).equals(msg1)) {
-					msg.setText(habitacion.getServicios().get(i).getDescripcion());
+					msg.setText(servicios.get(i).getDescripcion());
+					idServicio = servicios.get(i).getIdServicio();
 				}
 			}
 

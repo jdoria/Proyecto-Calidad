@@ -3,9 +3,11 @@ package Interfaz.Hotel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
+import dao.HotelDAO;
 import dto.AgenciaDTO;
 import dto.HabitacionDTO;
 import dto.HotelDTO;
@@ -31,16 +33,18 @@ public class ModificarHabitacion extends JFrame {
 	private JButton modificar;
 	private HotelDTO hotel;
 	private HabitacionDTO habitacion;
+	private ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
+	private HotelDAO hotelDAO = new HotelDAO();
 	
 	
-	public ModificarHabitacion(HotelDTO hotelPantalla, String nombreSeleccion) {
+	public ModificarHabitacion(String nombreSeleccion, int idHotel) {
 		// TODO Auto-generated constructor stub
 		
-		hotel = hotelPantalla;
+		habitaciones = hotelDAO.GetHabitaciones(idHotel);
 		
-		for(int i = 0; i<hotel.getHabitaciones().size();i++){
-			if(hotel.getHabitaciones().get(i).getTipo().equals(nombreSeleccion)){
-				habitacion = hotel.getHabitaciones().get(i);
+		for(int i = 0; i<habitaciones.size();i++){
+			if(habitaciones.get(i).getTipo().equals(nombreSeleccion)){
+				habitacion = habitaciones.get(i);
 				break;
 			}
 		}

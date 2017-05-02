@@ -45,40 +45,4 @@ public class AgenciaDTO {
 		
 	}
 	
-	public void modificarHotel(String nombre, String direccion, String telefono, String ciudad, String pais){
-		for (int i = 0; i < hoteles.size(); i++) {
-			if(hoteles.get(i).getNombre().equals(nombre)){
-				hoteles.get(i).setCiudad(ciudad);
-				hoteles.get(i).setDireccion(direccion);
-				hoteles.get(i).setTelefono(telefono);
-				hoteles.get(i).setPais(pais);
-				break;
-			}
-			
-		}
-		
-		
-	}
-	
-	public void eliminarHotel(String nombre){
-		for (int i = 0; i < hoteles.size(); i++) {
-			if(hoteles.get(i).getNombre().equals(nombre)){
-				hoteles.remove(i);
-				break;
-			}
-			
-		}
-		
-	}
-	
-	public HotelDTO buscarHotel(String nombre){
-		HotelDTO hotel = new HotelDTO();
-		for (int i = 0; i < hoteles.size(); i++) {
-			if(hoteles.get(i).getNombre().equals(nombre)){
-				return hoteles.get(i);
-			}
-		}
-		return hotel;
-	}
-
 }

@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import dao.HotelDAO;
+import dto.HabitacionDTO;
 import dto.HotelDTO;
 
 public class VerHabitacion extends JFrame implements ActionListener{
@@ -24,10 +26,13 @@ public class VerHabitacion extends JFrame implements ActionListener{
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
 	private HotelDTO hotel = new HotelDTO();
+	private HotelDAO hotelDAO = new HotelDAO();
+	private ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
+	private int idHabitacion = 0;
 	
-	public VerHabitacion(HotelDTO hotelPantalla) {
+	public VerHabitacion(int idHotel) {
 		
-		hotel = hotelPantalla;
+		habitaciones = hotelDAO.GetHabitaciones(idHotel);
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(400, 400);
@@ -38,8 +43,8 @@ public class VerHabitacion extends JFrame implements ActionListener{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
-		for (int i = 0; i < hotel.getHabitaciones().size(); i++) {
-			listaHabitaciones.add(hotel.getHabitaciones().get(i).getTipo());
+		for (int i = 0; i < habitaciones.size(); i++) {
+			listaHabitaciones.add(habitaciones.get(i).getTipo());
 			mlista.addElement(listaHabitaciones.get(i));
 		}
 		
@@ -80,6 +85,10 @@ public class VerHabitacion extends JFrame implements ActionListener{
 		return msg.getText();
 	}
 	
+	public int getIdHabitacion(){
+		return idHabitacion;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -88,7 +97,8 @@ public class VerHabitacion extends JFrame implements ActionListener{
 			String msg1 = (String)cb.getSelectedItem();
 			for(int i=0; i<listaHabitaciones.size(); i++){
 				if(listaHabitaciones.get(i).equals(msg1)){
-					msg.setText(hotel.getHabitaciones().get(i).getTipo());
+					msg.setText(habitaciones.get(i).getTipo());
+					idHabitacion = habitaciones.get(i).getIdHabitacion();
 				}
 			}
 			

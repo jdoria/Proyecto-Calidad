@@ -3,12 +3,14 @@ package Interfaz.Habitacion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import dao.HabitacionDAO;
 import dto.HabitacionDTO;
 import dto.ServicioDTO;
 
@@ -20,15 +22,19 @@ public class ModificarServicio extends JFrame {
 	private JButton modificar;
 	private HabitacionDTO habitacion;
 	private ServicioDTO servicio;
+	private ArrayList<ServicioDTO> servicios = new ArrayList<>();
+	private HabitacionDAO habitacionDAO = new HabitacionDAO();
+	private int idServicio=0;
 
-	public ModificarServicio(HabitacionDTO habitacionPantalla, String nombreSeleccion) {
+	public ModificarServicio(String nombreSeleccion, int idHabitacion) {
 		// TODO Auto-generated constructor stub
 
-		habitacion = habitacionPantalla;
+		servicios = habitacionDAO.GetServicios(idHabitacion);
 
-		for (int i = 0; i < habitacion.getServicios().size(); i++) {
-			if (habitacion.getServicios().get(i).getDescripcion().equals(nombreSeleccion)) {
-				servicio = habitacion.getServicios().get(i);
+		for (int i = 0; i < servicios.size(); i++) {
+			if (servicios.get(i).getDescripcion().equals(nombreSeleccion)) {
+				servicio = servicios.get(i);
+				idServicio = servicio.getIdServicio();
 				break;
 			}
 		}
@@ -66,6 +72,10 @@ public class ModificarServicio extends JFrame {
 	
 	public String getDescripcion(){
 		return descripcion.getText();
+	}
+	
+	public int getIdServicio(){
+		return idServicio;
 	}
 	
 	public void buttonModificar(ActionListener l){

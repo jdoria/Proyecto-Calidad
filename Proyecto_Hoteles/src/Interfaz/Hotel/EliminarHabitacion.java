@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import dao.HotelDAO;
+import dto.HabitacionDTO;
 import dto.HotelDTO;
 
 public class EliminarHabitacion extends JFrame implements ActionListener {
@@ -18,12 +20,14 @@ public class EliminarHabitacion extends JFrame implements ActionListener {
 	private ArrayList<String> listaHabitaciones = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private HotelDTO hotel = new HotelDTO();
+	private ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
+	private HotelDAO hotelDAO = new HotelDAO();
+	private int idHabitacion = 0;
 
-	public EliminarHabitacion(HotelDTO hotelPantalla) {
+	public EliminarHabitacion(int idHotel) {
 		// TODO Auto-generated constructor stub
 
-		hotel = hotelPantalla;
+		habitaciones = hotelDAO.GetHabitaciones(idHotel);
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(400, 400);
@@ -33,8 +37,8 @@ public class EliminarHabitacion extends JFrame implements ActionListener {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		for (int i = 0; i < hotel.getHabitaciones().size(); i++) {
-			listaHabitaciones.add(hotel.getHabitaciones().get(i).getTipo());
+		for (int i = 0; i < habitaciones.size(); i++) {
+			listaHabitaciones.add(habitaciones.get(i).getTipo());
 			mlista.addElement(listaHabitaciones.get(i));
 		}
 
@@ -74,6 +78,10 @@ public class EliminarHabitacion extends JFrame implements ActionListener {
 		return msg.getText();
 	}
 	
+	public int getIdHabitacion(){
+		return idHabitacion;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -82,7 +90,8 @@ public class EliminarHabitacion extends JFrame implements ActionListener {
 			String msg1 = (String)cb.getSelectedItem();
 			for(int i=0; i<listaHabitaciones.size(); i++){
 				if(listaHabitaciones.get(i).equals(msg1)){
-					msg.setText(hotel.getHabitaciones().get(i).getTipo());
+					msg.setText(habitaciones.get(i).getTipo());
+					idHabitacion = habitaciones.get(i).getIdHabitacion();
 				}
 			}
 			

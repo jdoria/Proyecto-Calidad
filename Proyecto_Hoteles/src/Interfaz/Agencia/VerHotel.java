@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import dao.AgenciaDAO;
 import dto.AgenciaDTO;
+import dto.HotelDTO;
 
 public class VerHotel extends JFrame implements ActionListener{
 	
@@ -19,9 +21,11 @@ public class VerHotel extends JFrame implements ActionListener{
 	private ArrayList<String> listaHoteles = new ArrayList<String>();
 	private JComboBox lista = new JComboBox();
 	private DefaultComboBoxModel mlista = new DefaultComboBoxModel();
-	private AgenciaDTO agencia;
+	private ArrayList<HotelDTO> hoteles;
+	private AgenciaDAO agenciaDAO = new AgenciaDAO();
+	private int idHotel = 0;
 	
-	public VerHotel(AgenciaDTO agenciaPantalla) {
+	public VerHotel() {
 		// TODO Auto-generated constructor stub
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(400, 400);
@@ -31,10 +35,14 @@ public class VerHotel extends JFrame implements ActionListener{
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		agencia = agenciaPantalla;
 		
-		for (int i = 0; i < agencia.getHoteles().size(); i++) {
-			listaHoteles.add(agencia.getHoteles().get(i).getNombre());
+		hoteles = new ArrayList<>();
+		hoteles = agenciaDAO.GetHoteles();
+		
+		System.out.println(hoteles.size());
+		
+		for (int i = 0; i < hoteles.size(); i++) {
+			listaHoteles.add(hoteles.get(i).getNombre());
 			mlista.addElement(listaHoteles.get(i));
 		}
 		
@@ -67,13 +75,7 @@ public class VerHotel extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	
-	/*public static void main(String[] args){
-		VerHotel p = new VerHotel();
-	}*/
 	
-	public AgenciaDTO getAgencia(){
-		return agencia;
-	}
 	
 	public void buttonVer(ActionListener l){
 		ver.addActionListener(l);
@@ -81,6 +83,10 @@ public class VerHotel extends JFrame implements ActionListener{
 	
 	public String getNombreHotel(){
 		return msg.getText();
+	}
+	
+	public int getIdHotel(){
+		return idHotel;
 	}
 	
 	@Override
@@ -91,7 +97,8 @@ public class VerHotel extends JFrame implements ActionListener{
 			String msg1 = (String)cb.getSelectedItem();
 			for(int i=0; i<listaHoteles.size(); i++){
 				if(listaHoteles.get(i).equals(msg1)){
-					msg.setText(agencia.getHoteles().get(i).getNombre());
+					msg.setText(hoteles.get(i).getNombre());
+					idHotel = hoteles.get(i).getIdHotel();
 				}
 			}
 			

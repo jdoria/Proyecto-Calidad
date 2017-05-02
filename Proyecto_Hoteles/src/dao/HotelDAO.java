@@ -16,24 +16,23 @@ public class HotelDAO {
 	private String query;
 	private ResultSet rs;
 	
-	public ArrayList<HabitacionDTO> GetHabitaciones(){
+	public ArrayList<HabitacionDTO> GetHabitaciones(int idHotel){
 		ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select idHabitacion, idHotel1, tipo, cantidad, cama, precio, tamaño, numPersonas from habitacion;";
+			query = "select idHabitacion, tipo, cantidad, cama, precio, tamaño, numPersonas from habitacion where idHotel1 = '"+idHotel+"';";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
 				HabitacionDTO a = new HabitacionDTO();
-				a.setIdHabitacion(Integer.parseInt("idHabitacion"));
-				a.setIdHotel1(Integer.parseInt("idHotel1"));
-				a.setTipo("tipo");
-				a.setCantidad(Integer.parseInt("cantidad"));
-				a.setCama("cama");
-				a.setPrecio(Integer.parseInt("precio"));
-				a.setTamaño("tamaño");
-				a.setNumPersonas(Integer.parseInt("numPersonas"));
+				a.setIdHabitacion(Integer.parseInt(rs.getString("idHabitacion")));
+				a.setTipo(rs.getString("tipo"));
+				a.setCantidad(Integer.parseInt(rs.getString("cantidad")));
+				a.setCama(rs.getString("cama"));
+				a.setPrecio(Integer.parseInt(rs.getString("precio")));
+				a.setTamaño(rs.getString("tamaño"));
+				a.setNumPersonas(Integer.parseInt(rs.getString("numPersonas")));
 				habitaciones.add(a);
 				
 			}
@@ -68,7 +67,7 @@ public class HotelDAO {
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "update habitacion set tipo = '"+habitacion.getTipo()+"', cantidad = '"+habitacion.getCantidad()+"', cama = '"+habitacion.getCama()+"', precio = '"+habitacion.getPrecio()+"', tamaño = '"+habitacion.getTamaño()+"', numPersonas = '"+habitacion.getNumPersonas()+"' where idHabitacion = '"+habitacion.getIdHabitacion()+"'";
+			query = "update habitacion set tipo = '"+habitacion.getTipo()+"', cantidad = '"+habitacion.getCantidad()+"', cama = '"+habitacion.getCama()+"', precio = '"+habitacion.getPrecio()+"', tamaño = '"+habitacion.getTamaño()+"', numPersonas = '"+habitacion.getNumPersonas()+"' where idHabitacion = '"+habitacion.getIdHabitacion()+"'; ";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		
@@ -83,8 +82,25 @@ public class HotelDAO {
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
+			eliminarServicios(habitacion.getIdHabitacion());
 			sentencia = conexion.conectar().createStatement();
-			query = "delete from habitacion where tipo = '"+habitacion.getTipo()+"'";
+			query = "delete from habitacion where idHabitacion = '"+habitacion.getIdHabitacion()+"'";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	private void eliminarServicios(int idHabitacion){
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "delete from servicio where idHabitacion1 = '"+idHabitacion+"'";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		

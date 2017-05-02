@@ -15,19 +15,18 @@ public class HabitacionDAO {
 	private ResultSet rs;
 	
 	
-	public ArrayList<ServicioDTO> GetServicios(){
+	public ArrayList<ServicioDTO> GetServicios(int idHabitacion){
 		ArrayList<ServicioDTO> servicios = new ArrayList<>();
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select idServicio, idHabitacion1, descripcion from servicio;";
+			query = "select idServicio, descripcion from servicio where idHabitacion1 = '"+idHabitacion+"';";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
 				ServicioDTO a = new ServicioDTO();
-				a.setIdServicio(Integer.parseInt("idServicio"));
-				a.setIdHabitacion1(Integer.parseInt("idHabitacion1"));
-				a.setDescripcion("descripcion");
+				a.setIdServicio(Integer.parseInt(rs.getString("idServicio")));
+				a.setDescripcion(rs.getString("descripcion"));
 				servicios.add(a);
 				
 			}
@@ -45,7 +44,7 @@ public class HabitacionDAO {
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "insert into servicios(idHabitacion1, descripcion) values('"+servicio.getIdHabitacion1()+"', '"+servicio.getDescripcion()+"');";
+			query = "insert into servicio(idHabitacion1, descripcion) values('"+servicio.getIdHabitacion1()+"', '"+servicio.getDescripcion()+"');";
 			sentencia.executeUpdate(query);
 			sentencia.close();
 		

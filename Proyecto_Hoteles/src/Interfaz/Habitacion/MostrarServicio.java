@@ -2,12 +2,14 @@ package Interfaz.Habitacion;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import dao.HabitacionDAO;
 import dto.HabitacionDTO;
 import dto.ServicioDTO;
 
@@ -17,16 +19,17 @@ public class MostrarServicio extends JFrame {
 	private JLabel descripcionServicio;
 	private JLabel descripcion;
 	private JButton modificar;
-	private HabitacionDTO habitacion;
 	private ServicioDTO servicio;
+	private ArrayList<ServicioDTO> servicios = new ArrayList<>();
+	private HabitacionDAO habitacionDAO = new HabitacionDAO();
 	
-	public MostrarServicio(HabitacionDTO habitacionPantalla, String nombreSeleccion) {
+	public MostrarServicio(String nombreSeleccion, int idHabitacion) {
 		// TODO Auto-generated constructor stub
-		habitacion = habitacionPantalla;
+		servicios = habitacionDAO.GetServicios(idHabitacion);
 
-		for (int i = 0; i < habitacion.getServicios().size(); i++) {
-			if (habitacion.getServicios().get(i).getDescripcion().equals(nombreSeleccion)) {
-				servicio = habitacion.getServicios().get(i);
+		for (int i = 0; i < servicios.size(); i++) {
+			if (servicios.get(i).getDescripcion().equals(nombreSeleccion)) {
+				servicio = servicios.get(i);
 				break;
 			}
 		}

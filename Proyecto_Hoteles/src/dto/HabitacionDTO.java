@@ -38,8 +38,8 @@ public class HabitacionDTO {
 		this.idHabitacion = idHabitacion;
 	}
 	
-	public void setIdHotel1(int idServicios) {
-		this.idHotel1 = idServicios;
+	public void setIdHotel1(int idHotel1) {
+		this.idHotel1 = idHotel1;
 	}
 	
 	public String getCama() {

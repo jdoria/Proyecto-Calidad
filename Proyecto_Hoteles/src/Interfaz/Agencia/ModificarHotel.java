@@ -3,9 +3,11 @@ package Interfaz.Agencia;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
+import dao.AgenciaDAO;
 import dto.AgenciaDTO;
 import dto.HotelDTO;
 
@@ -24,22 +26,28 @@ public class ModificarHotel extends JFrame {
 	private JLabel anuncio;
 	private JButton modificar;
 	private String telefonoPantalla;
-	private AgenciaDTO agencia = new AgenciaDTO();
+	private AgenciaDAO agenciaDAO = new AgenciaDAO();
+	private ArrayList<HotelDTO> hoteles = new ArrayList<>();
 	private HotelDTO hotel;
+	private int idHotel = 0;
 	
 	
-	public ModificarHotel(AgenciaDTO agenciaPantalla, String nombreSeleccion) {
+	
+	public ModificarHotel(String nombreSeleccion) {
 		// TODO Auto-generated constructor stub
 		
-		agencia = agenciaPantalla;
+		hoteles = agenciaDAO.GetHoteles();
 		
-		for (int i = 0; i < agencia.getHoteles().size(); i++) {
-			if(agencia.getHoteles().get(i).getNombre().equals(nombreSeleccion)){
-				hotel = agencia.getHoteles().get(i);
+		
+		for (int i = 0; i < hoteles.size(); i++) {
+			if(hoteles.get(i).getNombre().equals(nombreSeleccion)){
+				hotel = hoteles.get(i);
 				break;
 			}
 			
 		}
+		
+		idHotel = hotel.getIdHotel();
 		
 		setTitle("Proyecto Ingeniería de Software I");
 		setSize(600, 700);
@@ -131,5 +139,9 @@ public class ModificarHotel extends JFrame {
 	
 	public String getPais(){ 
 		return pais.getText();
+	}
+	
+	public int getIdHotel(){
+		return idHotel;
 	}
 }
