@@ -106,26 +106,4 @@ public class HabitacionDTO {
 		
 	}
 	
-	
-	public void modificarServicio(String nuevaDescripcion, String descripcion){
-		for (int i = 0; i < servicios.size(); i++) {
-			if(servicios.get(i).getDescripcion().equals(descripcion)){
-				servicios.get(i).setDescripcion(nuevaDescripcion);
-				break;
-			}
-			
-		}
-	}
-	
-	public void eliminarServicio(String descripcion){
-		for (int i = 0; i < servicios.size(); i++) {
-			if(servicios.get(i).getDescripcion().equals(descripcion)){
-				servicios.remove(i);
-				break;
-			}
-			
-		}
-		
-	}
-	
 }

@@ -16,6 +16,7 @@ import dto.HabitacionDTO;
 import dto.HotelDTO;
 import dto.ServicioDTO;
 
+@SuppressWarnings("unused")
 public class CargaJSON {
 	
 	private ArrayList<HotelDTO> hoteles = new ArrayList<>();
@@ -135,19 +136,9 @@ public class CargaJSON {
 			
 		}
 		//agencia.setHoteles(hoteles);
-		carga.cargar(agencia);
+		carga.cargar2(agencia);
 		return agencia;
 	}
 	
 
-/*
-	public static void main(String[] args) throws IOException {
-
-		CargaJSON c = new CargaJSON();
-		AgenciaDTO a = new AgenciaDTO();
-		c.cargar3();
-		c.cargar(a);
-			
-	}	
-*/
 }

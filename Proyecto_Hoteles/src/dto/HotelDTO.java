@@ -116,29 +116,6 @@ public class HotelDTO {
 		return habitacion;
 	}
 	
-	public void modificarHabitacion(String tipo, int cantidad, String cama, String tamaño, int precio, int numPersonas){
-		for (int i = 0; i < habitaciones.size(); i++) {
-			if(habitaciones.get(i).getTipo().equals(tipo)){
-				habitaciones.get(i).setCama(cama);
-				habitaciones.get(i).setCantidad(cantidad);
-				habitaciones.get(i).setNumPersonas(numPersonas);
-				habitaciones.get(i).setPrecio(precio);
-				habitaciones.get(i).setTamaño(tamaño);
-				break;
-			}
-		}
-	}
-	
-	public void eliminarHabitacion(String tipo){
-		for (int i = 0; i < habitaciones.size(); i++) {
-			if(habitaciones.get(i).getTipo() == tipo){
-				habitaciones.remove(i);
-				break;
-			}
-			
-		}
-		
-	}
 	
 
 }
