@@ -111,6 +111,26 @@ public class HotelDAO {
 	
 	}
 	
+	public int getPrecioHabitacion(int idHabitacion){
+		int precio = 0;
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "select precio from habitacion where idHabitacion = '"+idHabitacion+"'";
+			rs = sentencia.executeQuery(query);
+			while(rs.next()){
+				precio = Integer.parseInt(rs.getString("precio"));
+			}
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return precio;
+	}
+	
 
 	
 	

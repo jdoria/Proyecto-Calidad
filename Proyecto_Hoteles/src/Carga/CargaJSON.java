@@ -74,12 +74,13 @@ public class CargaJSON {
 		
 	}
 	
-	public AgenciaDTO cargar(AgenciaDTO agencia) throws FileNotFoundException{
-		FileInputStream fr = new FileInputStream("JSON/Dann2.json");
+	public AgenciaDTO cargar(String ruta) throws FileNotFoundException{
+		AgenciaDTO agencia = new AgenciaDTO();
+		FileInputStream fr = new FileInputStream(ruta);
 		JsonReader reader = Json.createReader(fr);
 		JsonObject hotelesObject = reader.readObject();
 		reader.close();
-		int bandera = 0;
+		int flag = 0;
 		hotel = new HotelDTO();
 		JsonObject dannObject = hotelesObject.getJsonObject("dann");
 		JsonArray lugarArreglo = dannObject.getJsonArray("lugar");
@@ -91,23 +92,23 @@ public class CargaJSON {
 				for(JsonObject hotelObject : hotelArreglo.getValuesAs(JsonObject.class)){
 					
 					servicios = new ArrayList<>();
-				
-					for (int i = 0; i <agencia.getHoteles().size(); i++) {
-						if(agencia.getHoteles().get(i).getNombre().equals(hotelObject.getString("_nombre"))){
-							hotel = agencia.getHoteles().get(i);
-							bandera = 1;
+					for (int i = 0; i <hoteles.size(); i++) {
+						if(hoteles.get(i).getNombre().equals(hotelObject.getString("_nombre"))){
+							hotel = hoteles.get(i);
+							flag = 1;
 						}
-						
 					}
-					if(bandera == 0){
+					
+					if(flag == 0){
 						hotel = new HotelDTO();
 						hotel.setNombre(hotelObject.getString("_nombre"));
 						hotel.setDireccion(hotelObject.getString("_direccion"));
 						hotel.setTelefono(hotelObject.getString("_telefono"));
 						hotel.setCiudad(lugarObject.getString("_ciudad"));
-						hotel.setPais(lugarObject.getString("_pais"));		
+						hotel.setPais(lugarObject.getString("_pais"));	
+						hoteles.add(hotel);
 					}else{
-						bandera = 0;
+						flag = 0;
 					}
 					
 					habitacion = new HabitacionDTO();
@@ -130,12 +131,11 @@ public class CargaJSON {
 					
 				}
 				
-				agencia.getHoteles().add(hotel);
 				//hoteles.add(hotel);
 			}
 			
 		}
-		//agencia.setHoteles(hoteles);
+		agencia.setHoteles(hoteles);
 		carga.cargar2(agencia);
 		return agencia;
 	}

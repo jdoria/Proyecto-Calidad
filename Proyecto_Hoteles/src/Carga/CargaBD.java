@@ -114,7 +114,7 @@ public class CargaBD {
 							+ habitacion.getCantidad() + "', '" + habitacion.getCama() + "', '" + habitacion.getPrecio()
 							+ "', '" + habitacion.getTamaño() + "', '" + habitacion.getNumPersonas() + "');";
 					sentencia.executeUpdate(query);
-					idHabitacion = getIdHabitacion(habitacion.getTipo());
+					idHabitacion = getIdHabitacion(habitacion.getTipo(), habitacion.getIdHotel1());
 					habitacion.setIdHabitacion(idHabitacion);
 					sentencia.close();
 
@@ -125,7 +125,6 @@ public class CargaBD {
 					ServicioDTO servicio = new ServicioDTO();
 					servicio = agencia.getHoteles().get(i).getHabitaciones().get(j).getServicios().get(k);
 					servicio.setIdHabitacion1(habitacion.getIdHabitacion());
-					System.out.println(servicio.getIdHabitacion1());
 					try {
 						sentencia = conexion.conectar().createStatement();
 						query = "insert into servicio(idHabitacion1, descripcion) values('"
@@ -165,13 +164,13 @@ public class CargaBD {
 		return idHotel;
 	}
 
-	private int getIdHabitacion(String tipo) {
+	private int getIdHabitacion(String tipo, int idHotel) {
 		int idHabitacion = 0;
 		Conexion conexion = new Conexion();
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select idHabitacion from habitacion where tipo = '" + tipo + "'";
+			query = "select idHabitacion from habitacion where tipo = '" + tipo + "' and idHotel1 = '"+idHotel+"'";
 			rs = sentencia.executeQuery(query);
 			rs.next();
 			idHabitacion = Integer.parseInt(rs.getString("idHabitacion"));

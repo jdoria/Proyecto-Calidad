@@ -1,10 +1,16 @@
 package negocio;
 
+import java.util.ArrayList;
+
 import dao.AgenciaDAO;
+import dao.ClienteDAO;
 import dao.HabitacionDAO;
 import dao.HotelDAO;
+import dao.ReservaDAO;
+import dto.ClienteDTO;
 import dto.HabitacionDTO;
 import dto.HotelDTO;
+import dto.ReservaDTO;
 import dto.ServicioDTO;
 
 public class Agencia {
@@ -12,6 +18,8 @@ public class Agencia {
 	private AgenciaDAO agenciaDAO = new AgenciaDAO();
 	private HotelDAO hotelDAO = new HotelDAO();
 	private HabitacionDAO habitacionDAO = new HabitacionDAO();
+	private ClienteDAO clienteDAO = new ClienteDAO();
+	private ReservaDAO reservaDAO = new ReservaDAO();
 	
 	public void adicionarHotel(String nombre, String direccion, String telefono, String ciudad, String pais){
 		HotelDTO hotel = new HotelDTO();
@@ -91,5 +99,42 @@ public class Agencia {
 		servicio.setIdServicio(idServicio);
 		habitacionDAO.eliminarServicio(servicio);
 	}
+	
+	public boolean rutas(ArrayList<String> rutas, String ruta){
+		for (int i = 0; i < rutas.size(); i++) {
+			if(rutas.get(i).equals(ruta)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void adicionarCliente(int identificacion, String nombre, String telefono){
+		ClienteDTO cliente = new ClienteDTO();
+		cliente.setIdentificacion(identificacion);
+		cliente.setNombre(nombre);
+		cliente.setTelefono(telefono);
+		clienteDAO.adicionarCliente(cliente);
+	}
+	
+	public void adicionarReserva(int idCliente, int idHabitacion, String fechaInicio, String fechaFin, long dias, int valorTotal){
+		ReservaDTO reserva = new ReservaDTO();
+		int diasInt = (int) dias;
+		int estado = 1;
+		reserva.setIdCliente(idCliente);
+		reserva.setIdHabitacion(idHabitacion);
+		reserva.setFechaFin(fechaFin);
+		reserva.setFechaInicio(fechaInicio);
+		reserva.setDias(diasInt);
+		reserva.setValorTotal(valorTotal);
+		reserva.setEstado(estado);
+		reservaDAO.adicionarReserva(reserva);
+	}
+	
+	public int getIdCliente(){
+		int idCliente = 0;
+		idCliente = clienteDAO.getIdCliente();
+		return idCliente;
+	}
+}	
 
-}

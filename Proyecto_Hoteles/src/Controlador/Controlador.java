@@ -2,6 +2,7 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -68,6 +70,10 @@ public class Controlador {
 	private AgenciaDAO agenciaDAO = new AgenciaDAO();
 	private ArrayList<HabitacionDTO> habitaciones = new ArrayList<>();
 	private HotelDAO hotelDAO = new HotelDAO();
+	private ArrayList<String> rutas = new ArrayList<>();
+	private MenuCliente menuCliente;
+	private ReservarHabitacion reservarHabitacion;
+	private ConfirmarReserva confirmarReserva;
 	
 	public Controlador(Pantalla_Inicio interfaz) {
 		// TODO Auto-generated constructor stub
@@ -106,9 +112,75 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			menuCliente = new MenuCliente();
+			menuCliente.buttonConsultar(new listenerConsultar());
+			menuCliente.buttonReservar(new listenerVerHotelReservar());
+		}
+	}
+	
+	public class listenerVerHotelReservar implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			// TODO Auto-generated method stub
+			verHotel = new VerHotel();
+			verHotel.buttonVer(new listenerVerHabitacionReservar());
+		}
+	}
+	
+	public class listenerVerHabitacionReservar implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			verHabitacion = new VerHabitacion(verHotel.getIdHotel());
+			verHabitacion.buttonVer(new listenerReservarHabitacion());
+		}
+	}
+	
+	public class listenerReservarHabitacion implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			reservarHabitacion = new ReservarHabitacion();
+			reservarHabitacion.buttonReservar(new listenerConfirmarReserva());
+		}
+		
+	}
+	
+	public class listenerConfirmarReserva implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			int valor = hotelDAO.getPrecioHabitacion(verHabitacion.getIdHabitacion());
+			confirmarReserva = new ConfirmarReserva(verHabitacion.getHabitacion(), reservarHabitacion.getDias(), valor);
+			confirmarReserva.buttonAceptar(new listenerAceptarReserva());
+		}
+		
+	}
+	
+	public class listenerAceptarReserva implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			agenciaNegocio.adicionarCliente(Integer.parseInt(reservarHabitacion.getIdentificacion()), reservarHabitacion.getNombre(), reservarHabitacion.getTelefono());
+			agenciaNegocio.adicionarReserva(agenciaNegocio.getIdCliente(), verHabitacion.getIdHabitacion(), reservarHabitacion.getFechaInicio(), reservarHabitacion.getFechaFin(), reservarHabitacion.getDias(), confirmarReserva.getValorTotal());
+			
+			JOptionPane.showMessageDialog(null, "RESERVA EXITOSA", "CREAR RESERVA", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+	}
+	
+	public class listenerConsultar implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
 			verHotel = new VerHotel();
 			verHotel.buttonVer(new listenerVerHotelCliente());
 		}
+		
 	}
 	
 	public class listenerVerHotelCliente implements ActionListener{
@@ -140,8 +212,14 @@ public class Controlador {
 				
 			}else if(e.getActionCommand().equals("cargar")){
 				try {
-					if(agenciaDAO.GetHoteles().size()==0){
-						agencia = cargaxml.read(); //TODO 
+					JFileChooser archivo =new JFileChooser();
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
+					archivo.setFileFilter(filter);
+					archivo.showOpenDialog(archivo);
+					File ruta = archivo.getSelectedFile();
+					if(agenciaNegocio.rutas(rutas, ruta.getPath())){
+						agencia = cargaxml.read(ruta.getPath()); //TODO 
+						rutas.add(ruta.getPath());
 						JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
 					}else{
 						JOptionPane.showMessageDialog(null, "EL ARCHIVO YA FUE CARGADO", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
@@ -153,8 +231,14 @@ public class Controlador {
 				}
 			}else if(e.getActionCommand().equals("cargarJson")){
 				try {
-					if(agenciaDAO.GetHoteles().size()==0){
-						agencia = cargaJson.cargar(agencia);
+					JFileChooser archivo =new JFileChooser();
+					FileNameExtensionFilter filtroJson = new FileNameExtensionFilter("JSON", "json");
+					archivo.setFileFilter(filtroJson);
+					archivo.showOpenDialog(archivo);
+					File ruta = archivo.getSelectedFile();
+					if(agenciaNegocio.rutas(rutas, ruta.getPath())){
+						agencia = cargaJson.cargar(ruta.getPath());
+						rutas.add(ruta.getPath());
 						JOptionPane.showMessageDialog(null, "CARGADO CORRECTAMENTE", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);
 					}else{
 						JOptionPane.showMessageDialog(null, "EL ARCHIVO YA FUE CARGADO", "CARGA XML", JOptionPane.INFORMATION_MESSAGE);

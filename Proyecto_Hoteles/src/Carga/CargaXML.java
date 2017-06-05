@@ -21,14 +21,16 @@ import dto.ServicioDTO;
 
 public class CargaXML {
 	
-	private AgenciaDTO agencia = new AgenciaDTO();
+	//private AgenciaDTO agencia = new AgenciaDTO();
 	private HotelDTO hotel = new HotelDTO();
 	private ArrayList<HotelDTO> hoteles = new ArrayList<HotelDTO>();
 	private HabitacionDTO habitacion = new HabitacionDTO();
 	private ServicioDTO servicio = new ServicioDTO();
+	private CargaBD cargar = new CargaBD();
 	
-	public AgenciaDTO read() throws ParserConfigurationException, SAXException, IOException {
-		File fXmlFile = new File("XML/NH.xml");
+	public AgenciaDTO read(String ruta) throws ParserConfigurationException, SAXException, IOException {
+		AgenciaDTO agencia = new AgenciaDTO();
+		File fXmlFile = new File(ruta);
     	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     	Document doc = dBuilder.parse(fXmlFile);
@@ -89,7 +91,7 @@ public class CargaXML {
     		hoteles.add(hotel);
 		}
     	agencia.setHoteles(hoteles);
-    	
+    	cargar.cargar(agencia);
     	return agencia;
 	}
 

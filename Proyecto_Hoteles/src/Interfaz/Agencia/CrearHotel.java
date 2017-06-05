@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings("serial")
 public class CrearHotel extends JFrame {
 	
 	private JLabel anuncio;
@@ -93,10 +94,7 @@ public class CrearHotel extends JFrame {
 		setVisible(true);
 	}
 	
-	public static void main(String[] args){
-		CrearHotel c = new CrearHotel();
-	}
-	
+
 	
 	public void buttonCrear(ActionListener l){
 		crear.addActionListener(l);
