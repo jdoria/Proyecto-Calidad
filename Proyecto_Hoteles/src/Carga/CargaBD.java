@@ -16,7 +16,7 @@ public class CargaBD {
 	private String query;
 	private ResultSet rs;
 
-	public void cargar(AgenciaDTO agencia) {
+	/*public void cargar(AgenciaDTO agencia) {
 		for (int i = 0; i < agencia.getHoteles().size(); i++) {
 			HotelDTO hotel = new HotelDTO();
 			hotel = agencia.getHoteles().get(i);
@@ -79,7 +79,7 @@ public class CargaBD {
 
 		}
 
-	}
+	}*/
 
 	public void cargar2(AgenciaDTO agencia) {
 		int idHotel = 0;

@@ -1,6 +1,7 @@
 package Interfaz;
 
 import java.awt.Color;
+import java.awt.Desktop.Action;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ public class MenuAgencia extends JFrame {
 	private JButton eliminarHotel;
 	private JButton cargarXML;
 	private JButton cargarJson;
+	private JButton reporteReservas;
 
 	public MenuAgencia() {
 		// TODO Auto-generated constructor stub
@@ -34,40 +36,46 @@ public class MenuAgencia extends JFrame {
 		add(bienvenida);
 
 		crearHotel = new JButton("Crear Hotel");
-		crearHotel.setBounds(240, 180, 120, 30);
+		crearHotel.setBounds(240, 160, 120, 30);
 		crearHotel.setFont(new Font("Tahoma", 0, 15));
 		crearHotel.setActionCommand("crearHotel");
 		add(crearHotel);
 
 		mostrarHoteles = new JButton("Ver Hotel");
-		mostrarHoteles.setBounds(235, 260, 120, 30);
+		mostrarHoteles.setBounds(235, 240, 120, 30);
 		mostrarHoteles.setFont(new Font("Tahoma", 0, 15));
 		mostrarHoteles.setActionCommand("mostrarHoteles");
 		add(mostrarHoteles);
 
 		modificarHoteles = new JButton("Modificar Hotel");
-		modificarHoteles.setBounds(220, 340, 150, 30);
+		modificarHoteles.setBounds(220, 320, 150, 30);
 		modificarHoteles.setFont(new Font("Tahoma", 0, 15));
 		modificarHoteles.setActionCommand("modificarHoteles");
 		add(modificarHoteles);
 
 		eliminarHotel = new JButton("Eliminar Hotel");
-		eliminarHotel.setBounds(220, 420, 150, 30);
+		eliminarHotel.setBounds(220, 400, 150, 30);
 		eliminarHotel.setFont(new Font("Tahoma", 0, 15));
 		eliminarHotel.setActionCommand("eliminarHotel");
 		add(eliminarHotel);
 		
 		cargarXML = new JButton("Cargar XML");
-		cargarXML.setBounds(220, 500, 150, 30);
+		cargarXML.setBounds(220, 480, 150, 30);
 		cargarXML.setFont(new Font("Tahoma", Font.BOLD, 15));
 		cargarXML.setActionCommand("cargar");
 		add(cargarXML);
 		
 		cargarJson = new JButton("Cargar Json");
-		cargarJson.setBounds(220, 580, 150, 30);
+		cargarJson.setBounds(220, 560, 150, 30);
 		cargarJson.setFont(new Font("Tahoma", Font.BOLD, 15));
 		cargarJson.setActionCommand("cargarJson");
 		add(cargarJson);
+		
+		reporteReservas = new JButton("Reporte");
+		reporteReservas.setBounds(220, 630, 150, 30);
+		reporteReservas.setFont(new Font("Tahoma", Font.BOLD, 15));
+		reporteReservas.setActionCommand("reporte");
+		add(reporteReservas);
 
 		setVisible(true);
 	}
@@ -94,6 +102,10 @@ public class MenuAgencia extends JFrame {
 	
 	public void buttonCargarJson(ActionListener l){
 		cargarJson.addActionListener(l);
+	}
+	
+	public void buttonReserva(ActionListener l){
+		reporteReservas.addActionListener(l);
 	}
 	
 }

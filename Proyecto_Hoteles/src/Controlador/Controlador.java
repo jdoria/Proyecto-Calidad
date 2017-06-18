@@ -74,6 +74,7 @@ public class Controlador {
 	private MenuCliente menuCliente;
 	private ReservarHabitacion reservarHabitacion;
 	private ConfirmarReserva confirmarReserva;
+	private VerReservas verReservas;
 	
 	public Controlador(Pantalla_Inicio interfaz) {
 		// TODO Auto-generated constructor stub
@@ -105,6 +106,7 @@ public class Controlador {
 			menuAgencia.buttonEliminarHotel(new listenerEventosAgencia());
 			menuAgencia.buttonCargarXml(new listenerEventosAgencia());
 			menuAgencia.buttonCargarJson(new listenerEventosAgencia());
+			menuAgencia.buttonReserva(new listenerEventosAgencia());
 		}
 	}
 	
@@ -154,6 +156,7 @@ public class Controlador {
 			int valor = hotelDAO.getPrecioHabitacion(verHabitacion.getIdHabitacion());
 			confirmarReserva = new ConfirmarReserva(verHabitacion.getHabitacion(), reservarHabitacion.getDias(), valor);
 			confirmarReserva.buttonAceptar(new listenerAceptarReserva());
+			confirmarReserva.buttonCancelar(new listenerCancelarReserva());
 		}
 		
 	}
@@ -163,11 +166,36 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			if(agenciaNegocio.getCantidadHabitaciones(verHabitacion.getIdHabitacion())>0){
+				agenciaNegocio.adicionarCliente(Integer.parseInt(reservarHabitacion.getIdentificacion()), reservarHabitacion.getNombre(), reservarHabitacion.getTelefono());
+				agenciaNegocio.adicionarReserva(agenciaNegocio.getIdCliente(), verHabitacion.getIdHabitacion(), reservarHabitacion.getFechaInicio(), reservarHabitacion.getFechaFin(), reservarHabitacion.getDias(), confirmarReserva.getValorTotal(), reservarHabitacion.getFechaActual());
+				agenciaNegocio.descontarHabitacion(verHabitacion.getIdHabitacion());
+				JOptionPane.showMessageDialog(null, "RESERVA EXITOSA", "CREAR RESERVA", JOptionPane.INFORMATION_MESSAGE);
+			}else{
+				JOptionPane.showMessageDialog(null, "NO HAY HABITACIONES DISPONIBLES", "CREAR RESERVA", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		
+	}
+	
+	public class listenerTerminarReserva implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			int idHabitacion = agenciaNegocio.getIdHabitacionByReserva(Integer.parseInt(verReservas.getIdReserva()));
+			agenciaNegocio.terminarReserva(Integer.parseInt(verReservas.getIdReserva()), idHabitacion);
+			JOptionPane.showMessageDialog(null, "RESERVA TERMINADA", "TERMINAR RESERVA", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+	}
+	
+	public class listenerCancelarReserva implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
 			
-			agenciaNegocio.adicionarCliente(Integer.parseInt(reservarHabitacion.getIdentificacion()), reservarHabitacion.getNombre(), reservarHabitacion.getTelefono());
-			agenciaNegocio.adicionarReserva(agenciaNegocio.getIdCliente(), verHabitacion.getIdHabitacion(), reservarHabitacion.getFechaInicio(), reservarHabitacion.getFechaFin(), reservarHabitacion.getDias(), confirmarReserva.getValorTotal());
-			
-			JOptionPane.showMessageDialog(null, "RESERVA EXITOSA", "CREAR RESERVA", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
@@ -182,6 +210,8 @@ public class Controlador {
 		}
 		
 	}
+	
+
 	
 	public class listenerVerHotelCliente implements ActionListener{
 		@Override
@@ -248,6 +278,11 @@ public class Controlador {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}else if(e.getActionCommand().equals("reporte")){
+				verReservas = new VerReservas();
+				verReservas.cargarTablaProductos(agenciaNegocio.getReservas(), agenciaNegocio.getClientes());
+				verReservas.buttonTerminar(new listenerTerminarReserva());
+				
 			}
 			
 		}

@@ -117,7 +117,7 @@ public class Agencia {
 		clienteDAO.adicionarCliente(cliente);
 	}
 	
-	public void adicionarReserva(int idCliente, int idHabitacion, String fechaInicio, String fechaFin, long dias, int valorTotal){
+	public void adicionarReserva(int idCliente, int idHabitacion, String fechaInicio, String fechaFin, long dias, int valorTotal, String fechaReserva){
 		ReservaDTO reserva = new ReservaDTO();
 		int diasInt = (int) dias;
 		int estado = 1;
@@ -128,6 +128,7 @@ public class Agencia {
 		reserva.setDias(diasInt);
 		reserva.setValorTotal(valorTotal);
 		reserva.setEstado(estado);
+		reserva.setFechaReserva(fechaReserva);
 		reservaDAO.adicionarReserva(reserva);
 	}
 	
@@ -136,5 +137,38 @@ public class Agencia {
 		idCliente = clienteDAO.getIdCliente();
 		return idCliente;
 	}
+	
+	public int getCantidadHabitaciones(int idHabitacion){
+		return hotelDAO.getCantidadHabitaciones(idHabitacion);
+	}
+	
+	public void descontarHabitacion(int idHabitacion){
+		int cantidad = getCantidadHabitaciones(idHabitacion);
+		hotelDAO.descontarHabitacion(idHabitacion, cantidad);
+	}
+	
+	public ArrayList<ReservaDTO> getReservas(){
+		ArrayList<ReservaDTO> reservas = new ArrayList<>();
+		reservas = reservaDAO.GetReservas();
+		return reservas;
+	}
+	
+	public ArrayList<String> getClientes(){
+		ArrayList<String> clientes = new ArrayList<>();
+		clientes = clienteDAO.getNombreClientes();
+		return clientes;
+	}
+	
+	public void terminarReserva(int idReserva, int idHabitacion){
+		reservaDAO.terminarReserva(idReserva);
+		int cantidad = getCantidadHabitaciones(idHabitacion);
+		reservaDAO.aumentarCantidad(cantidad, idHabitacion);
+	}
+	
+	public int getIdHabitacionByReserva(int idReserva){
+		return reservaDAO.getIdHabitacionByReserva(idReserva);
+	}
+	
+	
 }	
 

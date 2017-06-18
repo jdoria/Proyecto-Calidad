@@ -63,7 +63,7 @@ public class ClienteDAO {
 		query = "";
 		try {
 			sentencia = conexion.conectar().createStatement();
-			query = "select top 1 * from cliente order by 1 desc;";
+			query = "select idCliente from agencia.cliente limit 1;";
 			rs = sentencia.executeQuery(query);
 			while(rs.next()){
 				idCliente = Integer.parseInt(rs.getString("idCliente"));
@@ -76,5 +76,27 @@ public class ClienteDAO {
 		}
 		return idCliente;
 	}
+	
+	public ArrayList<String> getNombreClientes(){
+		 ArrayList<String> clientes = new ArrayList<>();
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "select nombre from agencia.cliente;";
+			rs = sentencia.executeQuery(query);
+			while(rs.next()){
+				clientes.add(rs.getString("nombre"));
+			}
+		sentencia.close();
+		rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+
+	
 
 }

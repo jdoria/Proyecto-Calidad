@@ -51,7 +51,7 @@ public class ConfirmarReserva extends JFrame {
 		habitacionEscogida.setFont(new Font("Tahoma", Font.BOLD, 15));
 		add(habitacionEscogida);
 		
-		dias = new JLabel("Días: ");
+		dias = new JLabel("Noches: ");
 		dias.setBounds(70, 130, 150, 30);
 		dias.setFont(new Font("Tahoma", Font.BOLD, 15));
 		add(dias);

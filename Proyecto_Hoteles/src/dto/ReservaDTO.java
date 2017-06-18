@@ -10,6 +10,15 @@ public class ReservaDTO {
 	private int dias;
 	private int valorTotal;
 	private int estado;
+	private String fechaReserva;
+	
+	public String getFechaReserva() {
+		return fechaReserva;
+	}
+	
+	public void setFechaReserva(String fechaReserva) {
+		this.fechaReserva = fechaReserva;
+	}
 	
 	public void setDias(int dias) {
 		this.dias = dias;

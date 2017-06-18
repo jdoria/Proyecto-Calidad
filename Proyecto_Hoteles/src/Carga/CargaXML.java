@@ -91,7 +91,7 @@ public class CargaXML {
     		hoteles.add(hotel);
 		}
     	agencia.setHoteles(hoteles);
-    	cargar.cargar(agencia);
+    	cargar.cargar2(agencia);
     	return agencia;
 	}
 

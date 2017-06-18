@@ -132,7 +132,41 @@ public class HotelDAO {
 	}
 	
 
+	public int getCantidadHabitaciones(int idHabitacion){
+		int cantidad = 0;
+		Conexion conexion = new Conexion();
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "select cantidad from habitacion where idHabitacion = '"+idHabitacion+"'";
+			rs = sentencia.executeQuery(query);
+			while(rs.next()){
+				cantidad = Integer.parseInt(rs.getString("cantidad"));
+			}
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cantidad;
+	}
 	
+	public void descontarHabitacion(int idHabitacion, int cantidad){
+		Conexion conexion = new Conexion();
+		cantidad = cantidad-1;
+		query = "";
+		try {
+			sentencia = conexion.conectar().createStatement();
+			query = "update habitacion set cantidad = '"+cantidad+"' where idHabitacion = '"+idHabitacion+"'; ";
+			sentencia.executeUpdate(query);
+			sentencia.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 
 }

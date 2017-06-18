@@ -31,6 +31,8 @@ public class ReservarHabitacion extends JFrame {
 	private JButton reservar;
 	private JDateChooser fechaIni;
 	private JDateChooser fechaFi;
+	private JDateChooser fechaActual;
+	private JLabel fecha;
 	//private JTextField dias;
 	
 	public ReservarHabitacion() {
@@ -74,9 +76,18 @@ public class ReservarHabitacion extends JFrame {
 		telefono = new JTextField();
 		telefono.setBounds(335, 350, 150, 30);
 		add(telefono);
+		
+		fecha = new JLabel("Fecha: ");
+		fecha.setBounds(100, 400, 150, 30);
+		fecha.setFont(new Font("Tahoma", Font.BOLD, 15));
+		add(fecha);
+		
+		fechaActual = new JDateChooser();
+		fechaActual.setBounds(335, 400, 150, 30);
+		add(fechaActual);
 
 		fechaInicio = new JLabel("Fecha Inicio \n (DD/MM/AAAA): ");
-		fechaInicio.setBounds(100, 370, 230, 80);
+		fechaInicio.setBounds(100, 420, 230, 80);
 		fechaInicio.setFont(new Font("Tahoma", Font.BOLD, 15));
 		add(fechaInicio);
 
@@ -84,11 +95,11 @@ public class ReservarHabitacion extends JFrame {
 		fechaIni.setBounds(335, 400, 150, 30);
 		add(fechaIni);*/
 		fechaIni = new JDateChooser();
-		fechaIni.setBounds(335,400,150,30);
+		fechaIni.setBounds(335,450,150,30);
 		add(fechaIni);
 
 		fechaFin = new JLabel("Fecha Fin (DD/MM/AAAA): ");
-		fechaFin.setBounds(100, 420, 210, 80);
+		fechaFin.setBounds(100, 470, 210, 80);
 		fechaFin.setFont(new Font("Tahoma", Font.BOLD, 15));
 		add(fechaFin);
 
@@ -96,11 +107,11 @@ public class ReservarHabitacion extends JFrame {
 		fechaFi.setBounds(335, 450, 150, 30);
 		add(fechaFi);*/
 		fechaFi = new JDateChooser();
-		fechaFi.setBounds(335,450,150,30);
+		fechaFi.setBounds(335,500,150,30);
 		add(fechaFi);
 
 		reservar = new JButton("Reservar");
-		reservar.setBounds(250, 550, 150, 40);
+		reservar.setBounds(220, 570, 150, 40);
 		reservar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(reservar);
 		
@@ -126,9 +137,19 @@ public class ReservarHabitacion extends JFrame {
 		return fechaFin;
 	}
 	
+	public String getFechaActual(){
+		String formato = fechaActual.getDateFormatString();
+		Date date = fechaActual.getDate();
+		SimpleDateFormat sdf = new SimpleDateFormat(formato);
+		String fechaActual = String.valueOf(sdf.format(date));
+		return fechaActual;
+	}
+	
 	public long getDias(){
 		long dias = fechaFi.getDate().getTime() - fechaIni.getDate().getTime();
-		dias = TimeUnit.DAYS.convert(dias, TimeUnit.MILLISECONDS);
+		//System.out.println(fechaFi.getDate().getDay());
+		dias = (TimeUnit.DAYS.convert(dias, TimeUnit.MILLISECONDS));
+		//System.out.println(dias);
 		return dias;
 	}
 	
